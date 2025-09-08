@@ -28,7 +28,7 @@
 
     /* Header / Hero */
     header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(8,18,15,0.95),rgba(8,18,15,0.75));backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,175,55,0.2)}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 24px}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 24px;border-bottom:1px solid rgba(212,175,55,0.1)}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
     .brand h1{font-size:18px;margin:0;font-weight:800;letter-spacing:.5px}
@@ -123,8 +123,30 @@
 
     /* Mobile landscape */
     @media (max-width:768px){
-        .nav{flex-direction:column;gap:16px;padding:16px}
-        .actions{justify-content:center}
+        .nav{
+            flex-direction:column;
+            gap:12px;
+            padding:16px;
+            position:relative;
+        }
+        .brand{
+            text-align:center;
+            margin-bottom:8px;
+        }
+        .actions{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:8px;
+            width:100%;
+        }
+        .actions a{
+            flex:1;
+            min-width:120px;
+            text-align:center;
+            padding:10px 12px;
+            font-size:14px;
+        }
         .hero .wrap{gap:16px;padding:32px 16px}
         .hero h2{font-size:32px}
         .players-grid{grid-template-columns:repeat(2,1fr)}
@@ -137,6 +159,18 @@
     /* Mobile portrait */
     @media (max-width:480px){
         .container{padding:16px}
+        .nav{padding:12px}
+        .brand{margin-bottom:12px}
+        .actions{
+            gap:6px;
+            justify-content:space-between;
+        }
+        .actions a{
+            flex:1;
+            min-width:100px;
+            padding:8px 10px;
+            font-size:13px;
+        }
         .hero .wrap{padding:24px 12px}
         .hero h2{font-size:28px;line-height:1.2}
         .hero p{font-size:16px}
@@ -155,15 +189,27 @@
 
     /* Very small screens */
     @media (max-width:360px){
-        .hero h2{font-size:24px}
-        .hero p{font-size:14px}
+        .nav{padding:10px}
+        .brand{margin-bottom:10px}
         .brand h1{font-size:16px}
         .logo{width:32px;height:32px}
-        .nav a.btn{padding:8px 12px;font-size:14px}
+        .actions{gap:4px}
+        .actions a{
+            min-width:80px;
+            padding:6px 8px;
+            font-size:12px;
+        }
+        .hero h2{font-size:24px}
+        .hero p{font-size:14px}
+        .hero .wrap{padding:20px 10px}
+        .btn-primary,.btn-outline{padding:8px 12px;font-size:13px}
         .social-icon{width:36px;height:36px}
         .jersey{font-size:10px;padding:4px 6px}
         .player-info{padding:8px}
         .player-name{font-size:14px}
+        .section-title h3{font-size:20px}
+        .news-card{padding:12px}
+        .news-title{font-size:16px}
     }
 
     .player-card{position:relative;overflow:hidden;border-radius:14px;border:1px solid rgba(212,175,55,.2);background:linear-gradient(180deg,#0c1714,#0a1512);cursor:pointer}
