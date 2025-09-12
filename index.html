@@ -3,10 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bellville RFC</title>
-  <meta name="description" content="Official one-page website for our Rugby Club: teams, players, fixtures, and contact." />
+  <title>Bellville RFC - Green & Gold Rugby Club</title>
+  <meta name="description" content="Official website of Bellville RFC (Green & Gold Rugby Club). View teams, players, training schedules, news, and contact information for our competitive rugby club in Bellville." />
+  <meta name="keywords" content="Bellville RFC, rugby club, Green & Gold, Bellville rugby, South African rugby, rugby teams, rugby training" />
+  <meta name="author" content="Bellville RFC" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bellvillerfc.com" />
+  <meta property="og:title" content="Bellville RFC - Green & Gold Rugby Club" />
+  <meta property="og:description" content="Official website of Bellville RFC. Competitive rugby club with teams from minis to seniors, women's rugby, and community programs." />
+  <meta property="og:image" content="https://bellvillerfc.com/image/352509247_1593737937768362_3758678116960265431_n.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://bellvillerfc.com" />
+  <meta property="twitter:title" content="Bellville RFC - Green & Gold Rugby Club" />
+  <meta property="twitter:description" content="Official website of Bellville RFC. Competitive rugby club with teams from minis to seniors, women's rugby, and community programs." />
+  <meta property="twitter:image" content="https://bellvillerfc.com/image/352509247_1593737937768362_3758678116960265431_n.jpg" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Bellville RFC",
+    "alternateName": "Green & Gold Rugby Club",
+    "url": "https://bellvillerfc.com",
+    "logo": "https://bellvillerfc.com/image/352509247_1593737937768362_3758678116960265431_n.jpg",
+    "description": "Competitive rugby club in Bellville, South Africa, with teams from minis to seniors, women's rugby, and community programs.",
+    "foundingDate": "1982",
+    "sport": "Rugby",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bellville",
+      "addressRegion": "Western Cape",
+      "addressCountry": "ZA"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+1-234-567-890",
+      "email": "info@greenandgoldrfc.club",
+      "contactType": "customer service"
+    },
+    "sameAs": [
+      "https://www.facebook.com/Bellvillerugby",
+      "https://www.instagram.com/bellville_rfc_1992",
+      "https://www.tiktok.com/@bellvillerfc_1992"
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpg" sizes="32x32" href="image/352509247_1593737937768362_3758678116960265431_n.jpg">
+  <link rel="icon" type="image/jpg" sizes="16x16" href="image/352509247_1593737937768362_3758678116960265431_n.jpg">
+  <link rel="apple-touch-icon" href="image/352509247_1593737937768362_3758678116960265431_n.jpg">
+
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#0b3d2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Bellville RFC">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-TileColor" content="#0b3d2e">
+  <meta name="msapplication-TileImage" content="image/352509247_1593737937768362_3758678116960265431_n.jpg">
+
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="manifest.json">
   <style>
     :root{
       --green:#0b3d2e; /* dark green */
@@ -248,13 +314,280 @@
     .wa-fab{position:fixed;right:18px;bottom:18px;background:linear-gradient(180deg,#25D366,#138c47);color:#fff;border:none;border-radius:999px;padding:14px 16px;font-weight:800;box-shadow:var(--shadow);text-decoration:none;z-index:60}
 
     footer{padding:28px 24px;border-top:1px solid rgba(212,175,55,.2);text-align:center;opacity:.85}
+
+    /* Loading Spinner */
+    .loading-overlay{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999}
+    .spinner{width:50px;height:50px;border:4px solid rgba(212,175,55,.2);border-top:4px solid var(--gold);border-radius:50%;animation:spin 1s linear infinite}
+    @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+    .loading-overlay.hidden{display:none}
+
+    /* Photo Gallery */
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:20px}
+    .gallery-item{position:relative;overflow:hidden;border-radius:12px;border:1px solid rgba(212,175,55,.2);cursor:pointer;transition:transform .2s}
+    .gallery-item:hover{transform:scale(1.02)}
+    .gallery-item img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .2s}
+    .gallery-item:hover img{transform:scale(1.1)}
+    .gallery-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;padding:12px;opacity:0;transition:opacity .2s}
+    .gallery-item:hover .gallery-overlay{opacity:1}
+    .gallery-title{font-weight:600;margin-bottom:4px}
+    .gallery-caption{opacity:.9;font-size:14px}
+
+    /* Fixtures & Results */
+    .fixtures-container{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:20px}
+    .fixtures-section,.results-section{display:flex;flex-direction:column}
+    .fixture-item,.result-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(212,175,55,.1)}
+    .fixture-item:last-child,.result-item:last-child{border-bottom:none}
+    .fixture-date,.result-date{font-weight:600;color:var(--gold)}
+    .fixture-teams,.result-teams{opacity:.9}
+    .fixture-venue,.result-score{font-size:14px;opacity:.8}
+    .result-won{background:rgba(11,61,46,.3);border-left:4px solid var(--gold)}
+    .result-lost{background:rgba(139,0,0,.1);border-left:4px solid #8b0000}
+    .result-draw{background:rgba(128,128,128,.1);border-left:4px solid #808080}
+
+    /* Newsletter Signup */
+    .newsletter-signup{background:linear-gradient(135deg,var(--green-700),var(--green));color:#fff;padding:20px;border-radius:12px;margin-bottom:20px;text-align:center}
+    .newsletter-signup h4{margin:0 0 8px;font-size:18px}
+    .newsletter-signup p{margin:0 0 16px;opacity:.9}
+    .newsletter-form{display:flex;gap:8px;max-width:400px;margin:0 auto}
+    .newsletter-form input{flex:1;padding:10px;border:none;border-radius:6px;font-size:14px}
+    .newsletter-form button{background:var(--gold);color:#111;border:none;padding:10px 16px;border-radius:6px;font-weight:600;cursor:pointer}
+    .newsletter-form button:hover{background:#b99420}
+
+    /* Social Media Feed */
+    .social-feed{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:20px}
+    .social-post{background:linear-gradient(180deg,var(--card),#0b1714);border:1px solid rgba(212,175,55,.15);border-radius:16px;overflow:hidden;transition:transform .2s}
+    .social-post:hover{transform:translateY(-4px)}
+    .social-post img{width:100%;height:200px;object-fit:cover;display:block}
+    .social-content{padding:16px}
+    .social-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:14px;opacity:.8}
+    .social-platform{font-weight:600;color:var(--gold)}
+    .social-date{opacity:.7}
+    .social-text{margin-bottom:12px;line-height:1.5}
+    .social-link{color:var(--gold);text-decoration:none;font-weight:600}
+    .social-link:hover{text-decoration:underline}
+
+    /* Search */
+    .search-container{position:relative;max-width:400px;margin:0 auto}
+    .search-input{width:100%;padding:12px 16px;border:1px solid rgba(212,175,55,.3);border-radius:25px;background:var(--card);color:var(--text);font-size:16px}
+    .search-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 2px rgba(212,175,55,.2)}
+    .search-results{position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid rgba(212,175,55,.2);border-radius:12px;max-height:300px;overflow-y:auto;z-index:100;margin-top:4px;display:none}
+    .search-result{padding:12px 16px;border-bottom:1px solid rgba(212,175,55,.1);cursor:pointer}
+    .search-result:hover{background:rgba(11,61,46,.1)}
+    .search-result:last-child{border-bottom:none}
+    .search-result-title{font-weight:600;color:var(--gold)}
+    .search-result-type{font-size:12px;opacity:.7;text-transform:uppercase}
+    .no-results{padding:16px;text-align:center;opacity:.7}
+
+    /* Highlight animation for search results */
+    @keyframes highlight {
+      0% { background-color: transparent; }
+      50% { background-color: rgba(212, 175, 55, 0.3); }
+      100% { background-color: transparent; }
+    }
+
+    /* GDPR Cookie Banner */
+    .cookie-banner{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,var(--green-700),var(--green));color:#fff;padding:20px;z-index:1000;border-top:3px solid var(--gold);box-shadow:0 -4px 20px rgba(0,0,0,.3);transform:translateY(100%);transition:transform .3s ease}
+    .cookie-banner.show{transform:translateY(0)}
+    .cookie-content{display:flex;align-items:flex-start;gap:20px;max-width:1200px;margin:0 auto}
+    .cookie-text{flex:1;font-size:14px;line-height:1.5}
+    .cookie-text p{margin:0 0 10px}
+    .cookie-text a{color:var(--gold);text-decoration:underline}
+    .cookie-buttons{display:flex;gap:12px;flex-shrink:0}
+    .cookie-btn{padding:10px 20px;border:none;border-radius:6px;font-weight:600;cursor:pointer;transition:all .2s}
+    .cookie-accept{background:var(--gold);color:#111}
+    .cookie-accept:hover{background:#b99420}
+    .cookie-settings{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3)}
+    .cookie-settings:hover{background:rgba(255,255,255,.1)}
+    .cookie-reject{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3)}
+    .cookie-reject:hover{background:rgba(255,255,255,.1)}
+    .cookie-close{position:absolute;top:10px;right:10px;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:5px}
+    .cookie-close:hover{color:var(--gold)}
+
+    /* Cookie Settings Modal */
+    .cookie-modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:1001;padding:20px;opacity:0;visibility:hidden;transition:all .3s}
+    .cookie-modal.show{opacity:1;visibility:visible}
+    .cookie-modal-content{background:var(--card);border-radius:12px;max-width:500px;width:100%;max-height:80vh;overflow-y:auto;border:1px solid rgba(212,175,55,.2)}
+    .cookie-modal-header{background:linear-gradient(135deg,var(--green-700),var(--green));color:#fff;padding:20px;border-radius:12px 12px 0 0}
+    .cookie-modal-title{margin:0;font-size:20px}
+    .cookie-modal-body{padding:20px}
+    .cookie-option{margin-bottom:20px;padding:15px;border:1px solid rgba(212,175,55,.2);border-radius:8px}
+    .cookie-option h4{margin:0 0 8px;font-size:16px;color:var(--gold)}
+    .cookie-option p{margin:0 0 10px;font-size:14px;opacity:.8}
+    .cookie-toggle{display:flex;align-items:center;gap:10px}
+    .cookie-toggle input[type="checkbox"]{width:18px;height:18px}
+    .cookie-toggle label{font-size:14px}
+    .cookie-modal-footer{padding:20px;border-top:1px solid rgba(212,175,55,.1);text-align:right}
+    .cookie-save{background:var(--gold);color:#111;border:none;padding:10px 20px;border-radius:6px;font-weight:600;cursor:pointer}
+    .cookie-save:hover{background:#b99420}
+
+    /* Live Scores */
+    .live-scores{background:linear-gradient(135deg,var(--green-700),var(--green));color:#fff;padding:20px;border-radius:12px;margin-bottom:20px}
+    .live-scores h4{margin:0 0 15px;font-size:18px;text-align:center}
+    .live-match{background:var(--card);border:1px solid rgba(212,175,55,.2);border-radius:12px;padding:20px;margin-bottom:15px}
+    .live-match.live{background:linear-gradient(135deg,#ff6b6b,#ee5a52);border:2px solid #ff4757;animation:pulse 2s infinite}
+    .match-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+    .match-status{background:var(--gold);color:#111;padding:4px 8px;border-radius:20px;font-size:12px;font-weight:600}
+    .match-status.live{background:#ff4757;color:#fff;animation:pulse 1s infinite}
+    .match-teams{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    .team{display:flex;flex-direction:column;align-items:center;gap:5px}
+    .team-name{font-weight:600;font-size:16px}
+    .team-score{font-size:24px;font-weight:800;color:var(--gold)}
+    .match-details{text-align:center;opacity:.8;font-size:14px}
+    .match-events{margin-top:15px}
+    .match-event{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(212,175,55,.1)}
+    .match-event:last-child{border-bottom:none}
+    .event-time{font-size:12px;opacity:.7}
+    .event-description{font-size:14px}
+    .event-player{font-weight:600;color:var(--gold)}
+    .no-live-matches{text-align:center;padding:20px;opacity:.7}
+    .refresh-scores{background:var(--gold);color:#111;border:none;padding:8px 16px;border-radius:6px;font-weight:600;cursor:pointer;margin-top:10px}
+    .refresh-scores:hover{background:#b99420}
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    /* Player Statistics */
+    .stats-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:30px}
+    .stat-card{background:linear-gradient(180deg,var(--card),#0b1714);border:1px solid rgba(212,175,55,.15);border-radius:12px;padding:20px;text-align:center}
+    .stat-value{font-size:32px;font-weight:800;color:var(--gold);margin-bottom:5px}
+    .stat-label{font-size:14px;opacity:.8;text-transform:uppercase;letter-spacing:1px}
+    .player-stats-container{display:grid;grid-template-columns:1fr 2fr;gap:30px;margin-top:30px}
+    .stats-sidebar{background:linear-gradient(180deg,var(--card),#0b1714);border:1px solid rgba(212,175,55,.15);border-radius:12px;padding:20px}
+    .player-profile{text-align:center;margin-bottom:20px}
+    .player-avatar{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin-bottom:10px}
+    .player-name{font-size:20px;font-weight:700;margin-bottom:5px}
+    .player-position{color:var(--gold);font-weight:600;margin-bottom:15px}
+    .stats-list{display:flex;flex-direction:column;gap:10px}
+    .stat-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(212,175,55,.1)}
+    .stat-item:last-child{border-bottom:none}
+    .stat-name{font-size:14px;opacity:.8}
+    .stat-number{font-weight:600;color:var(--gold)}
+    .stats-main{background:linear-gradient(180deg,var(--card),#0b1714);border:1px solid rgba(212,175,55,.15);border-radius:12px;padding:20px}
+    .stats-tabs{display:flex;gap:10px;margin-bottom:20px;border-bottom:1px solid rgba(212,175,55,.1);padding-bottom:15px}
+    .stats-tab{padding:8px 16px;border:1px solid rgba(212,175,55,.3);border-radius:20px;background:transparent;color:var(--text);cursor:pointer;font-size:14px}
+    .stats-tab.active{background:var(--gold);color:#111;border-color:var(--gold)}
+    .chart-container{margin-bottom:30px}
+    .chart-title{font-size:18px;font-weight:600;margin-bottom:15px;color:var(--gold)}
+    .bar-chart{display:flex;flex-direction:column;gap:12px}
+    .bar-item{display:flex;align-items:center;gap:15px}
+    .bar-label{font-size:14px;width:80px;flex-shrink:0}
+    .bar-container{flex:1;height:20px;background:rgba(212,175,55,.1);border-radius:10px;overflow:hidden}
+    .bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),#b99420);border-radius:10px;transition:width .5s ease}
+    .bar-value{font-size:12px;font-weight:600;margin-left:10px;color:var(--gold)}
+    .progress-chart{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .progress-item{text-align:center}
+    .progress-circle{position:relative;width:100px;height:100px;margin:0 auto 10px}
+    .progress-circle svg{width:100%;height:100%;transform:rotate(-90deg)}
+    .progress-circle circle{fill:none;stroke-width:8;stroke-linecap:round}
+    .progress-bg{stroke:rgba(212,175,55,.2)}
+    .progress-fill{stroke:var(--gold);stroke-dasharray:283;stroke-dashoffset:283;transition:stroke-dashoffset .5s ease}
+    .progress-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:18px;font-weight:700;color:var(--gold)}
+    .progress-label{font-size:14px;opacity:.8}
+    .comparison-section{margin-top:30px}
+    .comparison-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+    .comparison-card{background:linear-gradient(180deg,var(--card),#0b1714);border:1px solid rgba(212,175,55,.15);border-radius:12px;padding:20px}
+    .comparison-title{font-size:16px;font-weight:600;margin-bottom:15px;color:var(--gold)}
+    .comparison-item{display:flex;justify-content:space-between;margin-bottom:8px}
+    .comparison-item:last-child{margin-bottom:0}
+    .comparison-label{font-size:14px}
+    .comparison-value{font-weight:600}
+
+    /* PWA Install Prompt */
+    .pwa-install-prompt{position:fixed;bottom:20px;left:20px;right:20px;background:linear-gradient(135deg,var(--green-700),var(--green));color:#fff;padding:15px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.3);z-index:1000;transform:translateY(100px);transition:transform .3s ease;display:flex;align-items:center;gap:15px}
+    .pwa-install-prompt.show{transform:translateY(0)}
+    .pwa-install-icon{font-size:24px}
+    .pwa-install-text{flex:1}
+    .pwa-install-title{font-weight:600;margin-bottom:2px}
+    .pwa-install-desc{font-size:14px;opacity:.9}
+    .pwa-install-buttons{display:flex;gap:10px}
+    .pwa-install-btn{background:var(--gold);color:#111;border:none;padding:8px 16px;border-radius:6px;font-weight:600;cursor:pointer}
+    .pwa-install-btn:hover{background:#b99420}
+    .pwa-install-dismiss{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3);padding:8px 16px;border-radius:6px;font-weight:600;cursor:pointer}
+    .pwa-install-dismiss:hover{background:rgba(255,255,255,.1)}
+
+    /* Offline Indicator */
+    .offline-indicator{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#ff4757;color:#fff;padding:10px 20px;border-radius:25px;font-weight:600;z-index:1000;opacity:0;visibility:hidden;transition:all .3s ease}
+    .offline-indicator.show{opacity:1;visibility:visible}
+
+    /* Admin Panel */
+    .admin-btn{position:fixed;bottom:100px;right:20px;background:#ff4757;color:#fff;border:none;border-radius:50%;width:50px;height:50px;font-size:20px;cursor:pointer;z-index:1000;opacity:1;visibility:visible;transition:all .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+    .admin-btn:hover{background:#ff3742;transform:scale(1.1)}
+    .admin-login-modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;visibility:hidden;transition:all .3s}
+    .admin-login-modal.show{opacity:1;visibility:visible}
+    .admin-login-content{background:var(--card);border-radius:12px;padding:30px;max-width:400px;width:90%;text-align:center;border:1px solid rgba(212,175,55,.2)}
+    .admin-login-title{color:var(--gold);margin-bottom:20px;font-size:24px}
+    .admin-login-input{width:100%;padding:12px;border:1px solid rgba(212,175,55,.3);border-radius:6px;background:var(--card);color:var(--text);font-size:16px;margin-bottom:20px}
+    .admin-login-input:focus{outline:none;border-color:var(--gold)}
+    .admin-login-btn{background:var(--gold);color:#111;border:none;padding:12px 24px;border-radius:6px;font-weight:600;cursor:pointer;width:100%;margin-bottom:10px}
+    .admin-login-btn:hover{background:#b99420}
+    .admin-login-cancel{background:#666;color:#fff;border:none;padding:8px 16px;border-radius:6px;font-weight:600;cursor:pointer}
+    .admin-panel{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:1500;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s}
+    .admin-panel.show{opacity:1;visibility:visible}
+    .admin-panel-content{background:var(--card);border-radius:12px;padding:20px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto;border:1px solid rgba(212,175,55,.2)}
+    .admin-panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+    .admin-panel-title{color:var(--gold);font-size:24px}
+    .admin-panel-close{background:#666;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
+    .admin-panel-section{margin-bottom:30px;border-bottom:1px solid rgba(212,175,55,.1);padding-bottom:20px}
+    .admin-panel-section:last-child{border-bottom:none}
+    .admin-panel-section h3{color:var(--gold);margin-bottom:15px}
+    .admin-form-group{margin-bottom:15px}
+    .admin-form-group label{display:block;margin-bottom:5px;font-weight:600}
+    .admin-form-group input,.admin-form-group select{width:100%;padding:8px;border:1px solid rgba(212,175,55,.3);border-radius:4px;background:var(--card);color:var(--text)}
+    .admin-form-group input:focus,.admin-form-group select:focus{outline:none;border-color:var(--gold)}
+    .admin-action-btn{background:var(--gold);color:#111;border:none;padding:10px 20px;border-radius:6px;font-weight:600;cursor:pointer;margin-right:10px}
+    .admin-action-btn:hover{background:#b99420}
+    .admin-action-btn.danger{background:#ff4757;color:#fff}
+    .admin-action-btn.danger:hover{background:#ff3742}
+
+    /* Calendar */
+    .calendar-container{background:linear-gradient(180deg,var(--card),#0b1714);border:1px solid rgba(212,175,55,.15);border-radius:12px;padding:20px;margin-top:20px}
+    .calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+    .calendar-title{font-size:24px;font-weight:700;color:var(--gold)}
+    .calendar-nav{display:flex;gap:10px}
+    .calendar-btn{background:var(--gold);color:#111;border:none;padding:8px 16px;border-radius:6px;font-weight:600;cursor:pointer}
+    .calendar-btn:hover{background:#b99420}
+    .calendar-btn:disabled{background:#666;color:#999;cursor:not-allowed}
+    .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:20px}
+    .calendar-day-header{background:var(--gold);color:#111;padding:10px;text-align:center;font-weight:600;border-radius:6px}
+    .calendar-day{background:rgba(11,61,46,.3);padding:10px;text-align:center;border-radius:6px;min-height:60px;display:flex;flex-direction:column;cursor:pointer;transition:background .2s}
+    .calendar-day:hover{background:rgba(11,61,46,.5)}
+    .calendar-day.today{background:var(--gold);color:#111}
+    .calendar-day.other-month{opacity:.5}
+    .calendar-day-number{font-weight:600;margin-bottom:4px}
+    .calendar-events{display:flex;flex-direction:column;gap:2px}
+    .calendar-event{background:#ff6b6b;color:#fff;padding:2px 4px;border-radius:3px;font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .calendar-event.training{background:#4ecdc4}
+    .calendar-event.match{background:#ff6b6b}
+    .calendar-event.social{background:#ffe66d;color:#111}
+    .calendar-view-toggle{display:flex;gap:10px;margin-bottom:20px}
+    .view-btn{background:transparent;color:var(--text);border:1px solid rgba(212,175,55,.3);padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600}
+    .view-btn.active{background:var(--gold);color:#111;border-color:var(--gold)}
+    .calendar-list-view{display:flex;flex-direction:column;gap:15px}
+    .calendar-list-item{background:linear-gradient(180deg,var(--card),#0b1714);border:1px solid rgba(212,175,55,.15);border-radius:12px;padding:15px;display:flex;gap:15px}
+    .calendar-list-date{background:var(--gold);color:#111;padding:8px 12px;border-radius:8px;text-align:center;min-width:80px}
+    .calendar-list-content{flex:1}
+    .calendar-list-title{font-weight:600;color:var(--gold);margin-bottom:5px}
+    .calendar-list-details{opacity:.8;font-size:14px}
+    .calendar-list-actions{display:flex;gap:10px;margin-top:10px}
+    .calendar-list-btn{background:var(--gold);color:#111;border:none;padding:6px 12px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer}
+    .calendar-list-btn:hover{background:#b99420}
+    .calendar-list-btn.google{background:#4285f4;color:#fff}
+    .calendar-list-btn.google:hover{background:#3367d6}
   </style>
 </head>
 <body>
+  <!-- Loading Spinner -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+  </div>
+
   <header>
     <nav class="nav container">
       <div class="brand">
-        <img src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Bellville RFC Logo" class="logo" />
+        <img loading="lazy" src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Bellville RFC Logo" class="logo" />
         <h1>Bellville RFC</h1>
       </div>
       <div class="actions">
@@ -273,13 +606,13 @@
       <div>
         <span class="badge">Established 1982 • Community • High Performance</span>
         <h2>Strength • Unity • <span style="color:var(--gold)">Victory</span></h2>
-        <p>Welcome to <strong>Bellville RFC</strong>. From minis to first XV and our winning Women’s team, we grow athletes and serve our community with pride.</p>
+        <p>Welcome to <strong>Green & Gold RFC</strong>. From minis to first XV and our winning Women’s team, we grow athletes and serve our community with pride.</p>
         <div class="cta">
           <a href="#teams" class="btn-primary">Explore Teams</a>
           <a href="#contact" class="btn-outline">Join / Contact</a>
         </div>
       </div>
-      <img class="stadium" src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Rugby pitch with club colors" />
+      <img loading="lazy" class="stadium" src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Rugby pitch with club colors" />
     </div>
   </section>
 
@@ -287,7 +620,7 @@
     <div class="section-title"><span class="line"></span><h3>About the Club</h3></div>
     <div class="grid">
       <div class="card" style="padding:18px">
-        <p><strong>Green & Gold RFC</strong> is a competitive and family-friendly rugby club competing across regional leagues. Our mission is to build a culture defined by <em>discipline, respect, and excellence</em> on and off the pitch.</p>
+        <p><strong>Bellville RFC</strong> is a competitive and family-friendly rugby club competing across regional leagues. Our mission is to build a culture defined by <em>discipline, respect, and excellence</em> on and off the pitch.</p>
         <ul>
           <li>Home ground: The Oaks Stadium</li>
           <li>Training: Mon, Tue & Thu • 18:30</li>
@@ -321,13 +654,242 @@
     </div>
   </section>
 
+  <section id="gallery" class="container">
+    <div class="section-title"><span class="line"></span><h3>Photo Gallery</h3></div>
+
+    <div class="card" style="padding:24px">
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img loading="lazy" src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Team training session" />
+          <div class="gallery-overlay">
+            <div class="gallery-title">Training Session</div>
+            <div class="gallery-caption">Weekly team training at the Oaks Stadium</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img loading="lazy" src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Match day action" />
+          <div class="gallery-overlay">
+            <div class="gallery-title">Match Day</div>
+            <div class="gallery-caption">Intense action from our recent league match</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img loading="lazy" src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Community event" />
+          <div class="gallery-overlay">
+            <div class="gallery-title">Community Day</div>
+            <div class="gallery-caption">Family fun and rugby skills workshops</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img loading="lazy" src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Youth team celebration" />
+          <div class="gallery-overlay">
+            <div class="gallery-title">Youth Success</div>
+            <div class="gallery-caption">U18 team celebrating provincial qualification</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img loading="lazy" src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Women's team" />
+          <div class="gallery-overlay">
+            <div class="gallery-title">Women's Rugby</div>
+            <div class="gallery-caption">Our proud women's team in action</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img loading="lazy" src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Club social event" />
+          <div class="gallery-overlay">
+            <div class="gallery-title">Club Social</div>
+            <div class="gallery-caption">End of season awards and celebrations</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fixtures" class="container">
+    <div class="section-title"><span class="line"></span><h3>Fixtures & Results</h3></div>
+
+    <div class="card" style="padding:24px">
+      <div class="fixtures-container">
+        <div class="fixtures-section">
+          <h4 style="color:var(--gold);margin-bottom:16px;">Upcoming Fixtures</h4>
+          <div class="fixture-item">
+            <div>
+              <div class="fixture-date">Sat 14 Dec 2024</div>
+              <div class="fixture-teams">Bellville RFC vs. Constantia RFC</div>
+            </div>
+            <div class="fixture-venue">Oaks Stadium, 15:00</div>
+          </div>
+          <div class="fixture-item">
+            <div>
+              <div class="fixture-date">Sat 21 Dec 2024</div>
+              <div class="fixture-teams">Bellville RFC vs. Wynberg RFC</div>
+            </div>
+            <div class="fixture-venue">Wynberg Sports Club, 14:00</div>
+          </div>
+          <div class="fixture-item">
+            <div>
+              <div class="fixture-date">Sat 11 Jan 2025</div>
+              <div class="fixture-teams">Bellville RFC vs. False Bay RFC</div>
+            </div>
+            <div class="fixture-venue">Oaks Stadium, 15:00</div>
+          </div>
+        </div>
+        <div class="results-section">
+          <h4 style="color:var(--gold);margin-bottom:16px;">Recent Results</h4>
+          <div class="result-item result-won">
+            <div>
+              <div class="result-date">Sat 7 Dec 2024</div>
+              <div class="result-teams">Bellville RFC vs. Pinelands RFC</div>
+            </div>
+            <div class="result-score">28 - 15</div>
+          </div>
+          <div class="result-item result-lost">
+            <div>
+              <div class="result-date">Sat 30 Nov 2024</div>
+              <div class="result-teams">Bellville RFC vs. Villagers RFC</div>
+            </div>
+            <div class="result-score">12 - 22</div>
+          </div>
+          <div class="result-item result-won">
+            <div>
+              <div class="result-date">Sat 23 Nov 2024</div>
+              <div class="result-teams">Bellville RFC vs. Hamiltons RFC</div>
+            </div>
+            <div class="result-score">35 - 8</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendar Section -->
+  <section id="calendar" class="container">
+    <div class="section-title"><span class="line"></span><h3>Match Calendar</h3></div>
+
+    <div class="card" style="padding:24px">
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <h3 class="calendar-title" id="calendarTitle">December 2024</h3>
+          <div class="calendar-nav">
+            <button class="calendar-btn" id="prevMonth">← Previous</button>
+            <button class="calendar-btn" id="nextMonth">Next →</button>
+          </div>
+        </div>
+
+        <div class="calendar-view-toggle">
+          <button class="view-btn active" onclick="setCalendarView('month')">Month View</button>
+          <button class="view-btn" onclick="setCalendarView('list')">List View</button>
+        </div>
+
+        <div id="calendarContent">
+          <!-- Calendar grid or list will be rendered here -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Scores Section -->
+  <section id="live-scores" class="container">
+    <div class="section-title"><span class="line"></span><h3>Live Scores</h3></div>
+
+    <div class="card" style="padding:24px">
+      <div class="live-scores">
+        <h4>🏆 Live Match Updates</h4>
+        <div id="liveMatchesContainer">
+          <!-- Live matches will be loaded here -->
+        </div>
+        <button class="refresh-scores" onclick="refreshLiveScores()">🔄 Refresh Scores</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="social" class="container">
+    <div class="section-title"><span class="line"></span><h3>Follow Our Journey</h3></div>
+
+    <div class="card" style="padding:24px">
+      <div class="social-feed">
+        <div class="social-post">
+          <img loading="lazy" src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Instagram post" />
+          <div class="social-content">
+            <div class="social-meta">
+              <span class="social-platform">Instagram</span>
+              <span class="social-date">2 days ago</span>
+            </div>
+            <div class="social-text">Training session highlights! Our players showing great intensity and teamwork. #BellvilleRFC #RugbyLife</div>
+            <a href="https://www.instagram.com/bellville_rfc_1992" class="social-link" target="_blank">View on Instagram →</a>
+          </div>
+        </div>
+        <div class="social-post">
+          <img loading="lazy" src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Facebook post" />
+          <div class="social-content">
+            <div class="social-meta">
+              <span class="social-platform">Facebook</span>
+              <span class="social-date">1 week ago</span>
+            </div>
+            <div class="social-text">Match day excitement! Great win against Constantia RFC. Thanks to all our supporters! 🏆</div>
+            <a href="https://www.facebook.com/Bellvillerugby" class="social-link" target="_blank">View on Facebook →</a>
+          </div>
+        </div>
+        <div class="social-post">
+          <img loading="lazy" src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="TikTok post" />
+          <div class="social-content">
+            <div class="social-meta">
+              <span class="social-platform">TikTok</span>
+              <span class="social-date">3 days ago</span>
+            </div>
+            <div class="social-text">Behind the scenes at training! Check out our skills work and team spirit. #RugbyTraining</div>
+            <a href="https://www.tiktok.com/@bellvillerfc_1992" class="social-link" target="_blank">View on TikTok →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="teams" class="container">
     <div class="section-title"><span class="line"></span><h3>Teams & Players</h3></div>
+
+    <!-- Player Search -->
+    <div class="search-container" style="max-width:500px;margin:0 auto 24px;text-align:center">
+      <input type="text" class="search-input" placeholder="Search players by name, team, position, or number..." id="searchInput">
+      <div class="search-results" id="searchResults"></div>
+    </div>
 
     <div class="team-tabs" id="teamTabs"></div>
 
     <div class="card" style="padding:16px">
       <div id="teamPanel"></div>
+    </div>
+  </section>
+
+  <!-- Player Statistics Section -->
+  <section id="player-stats" class="container">
+    <div class="section-title"><span class="line"></span><h3>Player Statistics</h3></div>
+
+    <div class="card" style="padding:24px">
+      <!-- Stats Overview -->
+      <div class="stats-overview">
+        <div class="stat-card">
+          <div class="stat-value" id="totalPlayers">69</div>
+          <div class="stat-label">Total Players</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="totalTries">247</div>
+          <div class="stat-label">Total Tries</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="totalTackles">8,543</div>
+          <div class="stat-label">Total Tackles</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="avgMetres">1,247</div>
+          <div class="stat-label">Avg Metres/Carries</div>
+        </div>
+      </div>
+
+      <!-- Detailed Player Stats -->
+      <div class="player-stats-container" id="playerStatsContainer">
+        <!-- Player stats will be loaded here -->
+      </div>
     </div>
   </section>
 
@@ -342,9 +904,18 @@
   <section id="contact" class="container">
     <div class="section-title"><span class="line"></span><h3>Contact</h3></div>
     <div class="card contact-card">
+      <div class="newsletter-signup">
+        <h4>Stay Updated</h4>
+        <p>Subscribe to our newsletter for the latest news, fixtures, and club updates</p>
+        <form class="newsletter-form" action="https://formspree.io/f/your-newsletter-form-id" method="POST">
+          <input type="email" name="email" placeholder="Enter your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+
       <div class="contact-row"><strong>Email:</strong> <a href="mailto:info@greenandgoldrfc.club">info@greenandgoldrfc.club</a></div>
-      <div class="contact-row"><strong>Phone:</strong> <a href="tel:+27710483582">+1 234 567 890</a></div>
-      <div class="contact-row"><strong>WhatsApp:</strong> <a id="waLink" href="https://wa.me/27710483582" target="_blank" rel="noreferrer noopener">Message us on WhatsApp</a></div>
+      <div class="contact-row"><strong>Phone:</strong> <a href="tel:+1234567890">+1 234 567 890</a></div>
+      <div class="contact-row"><strong>WhatsApp:</strong> <a id="waLink" href="https://wa.me/1234567890" target="_blank" rel="noreferrer noopener">Message us on WhatsApp</a></div>
 
       <div class="social-media">
         <a href="https://www.facebook.com/Bellvillerugby" class="social-icon" title="Follow us on Facebook" target="_blank" rel="noopener">
@@ -369,14 +940,14 @@
   </section>
 
   <footer>
-    © <span id="year"></span> Bellville RFC • Built by DK Web Developments.
+    © <span id="year"></span> Green & Gold RFC • Built with pride in dark green, white & gold.
   </footer>
 
   <!-- Modal -->
   <div class="modal-backdrop" id="playerModalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal" role="document">
       <button class="close-btn" id="closeModal">✕</button>
-      <img id="modalPhoto" src="" alt="Player photo" />
+      <img loading="lazy" id="modalPhoto" src="" alt="Player photo" />
       <div class="modal-content">
         <h4 id="modalName">Player Name</h4>
         <div class="meta" id="modalMeta">#10 • Fly-Half • 1st Team</div>
@@ -389,6 +960,185 @@
   </div>
 
   <a class="wa-fab" id="waFab" href="https://wa.me/1234567890" target="_blank" rel="noreferrer noopener">WhatsApp</a>
+
+  <!-- GDPR Cookie Banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        <p><strong>Cookies & Privacy</strong></p>
+        <p>We use cookies to enhance your experience on our website. By continuing to browse, you agree to our use of cookies. <a href="#privacy-policy">Learn more about our Privacy Policy</a>.</p>
+      </div>
+      <div class="cookie-buttons">
+        <button class="cookie-btn cookie-accept" onclick="acceptAllCookies()">Accept All</button>
+        <button class="cookie-btn cookie-settings" onclick="openCookieSettings()">Cookie Settings</button>
+        <button class="cookie-btn cookie-reject" onclick="rejectCookies()">Reject All</button>
+      </div>
+      <button class="cookie-close" onclick="closeCookieBanner()">×</button>
+    </div>
+  </div>
+
+  <!-- PWA Install Prompt -->
+  <div class="pwa-install-prompt" id="pwaInstallPrompt">
+    <div class="pwa-install-icon">📱</div>
+    <div class="pwa-install-text">
+      <div class="pwa-install-title">Install Bellville RFC App</div>
+      <div class="pwa-install-desc">Get instant access to live scores and team updates</div>
+    </div>
+    <div class="pwa-install-buttons">
+      <button class="pwa-install-btn" onclick="installPWA()">Install</button>
+      <button class="pwa-install-dismiss" onclick="dismissPWAPrompt()">Later</button>
+    </div>
+  </div>
+
+  <!-- Admin Button -->
+  <button class="admin-btn" id="adminBtn" title="Admin Panel">⚙️</button>
+
+  <!-- Admin Login Modal -->
+  <div class="admin-login-modal" id="adminLoginModal">
+    <div class="admin-login-content">
+      <h2 class="admin-login-title">Admin Access</h2>
+      <input type="password" class="admin-login-input" id="adminPassword" placeholder="Enter admin password">
+      <button class="admin-login-btn" onclick="checkAdminPassword()">Login</button>
+      <button class="admin-login-cancel" onclick="closeAdminLogin()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-panel-content">
+      <div class="admin-panel-header">
+        <h2 class="admin-panel-title">Admin Panel</h2>
+        <div>
+          <button class="admin-action-btn" onclick="logoutAdmin()" style="margin-right:10px">Logout</button>
+          <button class="admin-panel-close" onclick="closeAdminPanel()">×</button>
+        </div>
+      </div>
+
+      <!-- Live Scores Management -->
+      <div class="admin-panel-section">
+        <h3>Live Scores Management</h3>
+        <div class="admin-form-group">
+          <label>Select Match:</label>
+          <select id="adminMatchSelect">
+            <option value="">Choose a match...</option>
+          </select>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+          <div class="admin-form-group">
+            <label>Home Score:</label>
+            <input type="number" id="adminHomeScore" min="0">
+          </div>
+          <div class="admin-form-group">
+            <label>Away Score:</label>
+            <input type="number" id="adminAwayScore" min="0">
+          </div>
+          <div class="admin-form-group">
+            <label>Match Minute:</label>
+            <input type="number" id="adminMatchMinute" min="0" max="80">
+          </div>
+        </div>
+        <div class="admin-form-group">
+          <label>Match Status:</label>
+          <select id="adminMatchStatus">
+            <option value="UPCOMING">Upcoming</option>
+            <option value="LIVE">Live</option>
+            <option value="FINISHED">Finished</option>
+          </select>
+        </div>
+        <button class="admin-action-btn" onclick="updateMatchFromAdmin()">Update Match</button>
+        <button class="admin-action-btn" onclick="refreshLiveScores()">Refresh Display</button>
+      </div>
+
+      <!-- Add Match Events -->
+      <div class="admin-panel-section">
+        <h3>Add Match Event</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+          <div class="admin-form-group">
+            <label>Event Type:</label>
+            <select id="eventType">
+              <option value="TRY">Try</option>
+              <option value="CONVERSION">Conversion</option>
+              <option value="PENALTY">Penalty</option>
+              <option value="DROP_GOAL">Drop Goal</option>
+              <option value="YELLOW_CARD">Yellow Card</option>
+              <option value="RED_CARD">Red Card</option>
+            </select>
+          </div>
+          <div class="admin-form-group">
+            <label>Player:</label>
+            <input type="text" id="eventPlayer" placeholder="Player name">
+          </div>
+          <div class="admin-form-group">
+            <label>Team:</label>
+            <select id="eventTeam">
+              <option value="home">Home</option>
+              <option value="away">Away</option>
+            </select>
+          </div>
+        </div>
+        <button class="admin-action-btn" onclick="addMatchEvent()">Add Event</button>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="admin-panel-section">
+        <h3>Quick Actions</h3>
+        <button class="admin-action-btn" onclick="startRandomMatch()">Start Random Match</button>
+        <button class="admin-action-btn" onclick="simulateMatchProgress()">Simulate Match</button>
+        <button class="admin-action-btn danger" onclick="resetAllMatches()">Reset All Matches</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offline Indicator -->
+  <div class="offline-indicator" id="offlineIndicator">
+    🔴 You're offline - Some features may be limited
+  </div>
+
+  <!-- Cookie Settings Modal -->
+  <div class="cookie-modal" id="cookieModal">
+    <div class="cookie-modal-content">
+      <div class="cookie-modal-header">
+        <h3 class="cookie-modal-title">Cookie Preferences</h3>
+      </div>
+      <div class="cookie-modal-body">
+        <div class="cookie-option">
+          <h4>Essential Cookies</h4>
+          <p>These cookies are necessary for the website to function and cannot be switched off.</p>
+          <div class="cookie-toggle">
+            <input type="checkbox" id="essentialCookies" checked disabled>
+            <label for="essentialCookies">Always Active</label>
+          </div>
+        </div>
+        <div class="cookie-option">
+          <h4>Analytics Cookies</h4>
+          <p>Help us understand how visitors interact with our website by collecting and reporting information anonymously.</p>
+          <div class="cookie-toggle">
+            <input type="checkbox" id="analyticsCookies">
+            <label for="analyticsCookies">Allow Analytics Cookies</label>
+          </div>
+        </div>
+        <div class="cookie-option">
+          <h4>Marketing Cookies</h4>
+          <p>Used to track visitors across websites to display relevant advertisements.</p>
+          <div class="cookie-toggle">
+            <input type="checkbox" id="marketingCookies">
+            <label for="marketingCookies">Allow Marketing Cookies</label>
+          </div>
+        </div>
+        <div class="cookie-option">
+          <h4>Functional Cookies</h4>
+          <p>Enable enhanced functionality and personalization, such as remembering your preferences.</p>
+          <div class="cookie-toggle">
+            <input type="checkbox" id="functionalCookies">
+            <label for="functionalCookies">Allow Functional Cookies</label>
+          </div>
+        </div>
+      </div>
+      <div class="cookie-modal-footer">
+        <button class="cookie-save" onclick="saveCookieSettings()">Save Preferences</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     // ===== UTIL =====
@@ -439,37 +1189,43 @@
         name: "Marcus Thompson",
         position: "Club President",
         photo: "image/marcus_thompson.jpg",
-        bio: "Leading the club with vision and dedication since 2015. Former provincial player with a passion for developing youth rugby."
+        bio: "Leading the club with vision and dedication since 2015. Former provincial player with a passion for developing youth rugby.",
+        stats: { experience: "8 Years", achievements: "3 Titles", programs: "5 Youth", community: "12 Events" }
       },
       {
         name: "Dr. Sarah Williams",
         position: "Medical Director",
         photo: "image/sarah_williams.jpg",
-        bio: "Experienced sports physician ensuring player health and safety. Specializes in rugby-related injuries and rehabilitation."
+        bio: "Experienced sports physician ensuring player health and safety. Specializes in rugby-related injuries and rehabilitation.",
+        stats: { experience: "12 Years", patients: "500+", injuries: "95% Recovery", certifications: "4 Specialist" }
       },
       {
         name: "James Mitchell",
         position: "Technical Director",
         photo: "image/james_mitchell.jpg",
-        bio: "Former Springbok assistant coach bringing international expertise to our development programs and coaching staff."
+        bio: "Former Springbok assistant coach bringing international expertise to our development programs and coaching staff.",
+        stats: { experience: "15 Years", teams: "8 Coached", wins: "78%", development: "25 Players" }
       },
       {
         name: "Lisa Chen",
         position: "Finance Manager",
         photo: "image/lisa_chen.jpg",
-        bio: "Managing club finances and sponsorships. Ensures sustainable growth and investment in our rugby programs."
+        bio: "Managing club finances and sponsorships. Ensures sustainable growth and investment in our rugby programs.",
+        stats: { experience: "6 Years", budget: "R2.5M", sponsors: "12 Active", growth: "15% Annual" }
       },
       {
         name: "David Nkosi",
         position: "Community Liaison",
         photo: "image/david_nkosi.jpg",
-        bio: "Building bridges between the club and local community. Organizes outreach programs and charity initiatives."
+        bio: "Building bridges between the club and local community. Organizes outreach programs and charity initiatives.",
+        stats: { experience: "5 Years", events: "48 Organized", volunteers: "120 Active", outreach: "2000+ People" }
       },
       {
         name: "Rachel Adams",
         position: "Marketing Coordinator",
         photo: "image/rachel_adams.jpg",
-        bio: "Driving brand awareness and engagement. Manages social media, events, and club communications."
+        bio: "Driving brand awareness and engagement. Manages social media, events, and club communications.",
+        stats: { experience: "4 Years", followers: "15K+", engagement: "8.5%", campaigns: "24 Successful" }
       }
     ];
 
@@ -563,9 +1319,9 @@
 
     const teamDefs = [
       { key:'first', name:'1st Team', female:false, coaches: [
-        {name: 'Alex Ford (Head Coach)', photo: 'image/alex_ford.jpg'},
-        {name: 'Brandon Cole (Assistant)', photo: 'image/brandon_cole.jpg'},
-        {name: 'Sam Patel (Analyst)', photo: 'image/sam_patel.jpg'}
+        {name: 'Alex Ford', position: 'Head Coach', photo: 'image/alex_ford.jpg', bio: 'Experienced head coach with 10 years in professional rugby. Known for tactical innovation and player development.', stats: { experience: "10 Years", wins: "72%", titles: "2 League", players: "35 Developed" }},
+        {name: 'Brandon Cole', position: 'Assistant Coach', photo: 'image/brandon_cole.jpg', bio: 'Former professional player turned coach. Specializes in forward play and set pieces.', stats: { experience: "6 Years", wins: "68%", speciality: "Forwards", lineouts: "85% Success" }},
+        {name: 'Sam Patel', position: 'Performance Analyst', photo: 'image/sam_patel.jpg', bio: 'Data-driven performance analyst providing tactical insights and match analysis.', stats: { experience: "4 Years", analysis: "120 Matches", accuracy: "92%", insights: "500+ Reports" }}
       ], seed: 101, players: [
         {name: "Savanna McClain", number:1, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 8, tackles: 95, assists: 12, metres: 450, kicks: 15}},
         {name: "Mitchell Suarez", number:2, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 5, tackles: 110, assists: 8, metres: 380, kicks: 22}},
@@ -592,9 +1348,9 @@
         {name: "Elisabeth Proctor", number:23, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 8, tackles: 68, assists: 15, metres: 550, kicks: 22}}
       ] },
       { key:'second', name:'2nd Team', female:false, coaches: [
-        {name: 'Dylan Reed (Head Coach)', photo: 'image/dylan_reed.jpg'},
-        {name: 'Marcus Gray (Assistant)', photo: 'image/marcus_gray.jpg'},
-        {name: 'Owen Hart (Analyst)', photo: 'image/owen_hart.jpg'}
+        {name: 'Dylan Reed', position: 'Head Coach', photo: 'image/dylan_reed.jpg', bio: 'Passionate coach focused on developing emerging talent. Former club captain with deep understanding of the game.', stats: { experience: "7 Years", wins: "65%", promotions: "8 Players", development: "Strong Focus" }},
+        {name: 'Marcus Gray', position: 'Assistant Coach', photo: 'image/marcus_gray.jpg', bio: 'Specialist in backline play and attacking strategies. Excellent at nurturing young talent.', stats: { experience: "5 Years", wins: "62%", speciality: "Backs", tries: "45 Coached" }},
+        {name: 'Owen Hart', position: 'Performance Analyst', photo: 'image/owen_hart.jpg', bio: 'Young analyst bringing fresh perspectives and modern analytical techniques to team preparation.', stats: { experience: "3 Years", analysis: "80 Matches", technology: "Advanced", reports: "300+ Detailed" }}
       ], seed: 202, players: [
         {name: "Vance Morales", number:1, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 7, tackles: 90, assists: 10, metres: 480, kicks: 12}},
         {name: "Skylar Casey", number:2, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 4, tackles: 105, assists: 7, metres: 350, kicks: 8}},
@@ -621,8 +1377,8 @@
         {name: "Ricardo Griffin", number:23, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 8, tackles: 72, assists: 12, metres: 480, kicks: 18}}
       ] },
       { key:'third', name:'3rd Team', female:false, coaches: [
-        {name: 'Chris Young (Head Coach)', photo: 'image/chris_young.jpg'},
-        {name: 'Elliot Ross (Assistant)', photo: 'image/elliot_ross.jpg'}
+        {name: 'Chris Young', position: 'Head Coach', photo: 'image/chris_young.jpg', bio: 'Dedicated coach with a focus on fundamentals and team spirit. Great at building confidence in developing players.', stats: { experience: "8 Years", wins: "58%", fundamentals: "Strong", spirit: "Excellent" }},
+        {name: 'Elliot Ross', position: 'Assistant Coach', photo: 'image/elliot_ross.jpg', bio: 'Former player with excellent technical knowledge. Specializes in skills development and fitness conditioning.', stats: { experience: "4 Years", wins: "55%", skills: "Technical", fitness: "High Level" }}
       ], seed: 303, players: [
         {name: "Charlie Nguyen", number:1, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 6, tackles: 92, assists: 9, metres: 460, kicks: 11}},
         {name: "Gabriel Jensen", number:2, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 4, tackles: 107, assists: 7, metres: 340, kicks: 7}},
@@ -649,37 +1405,37 @@
         {name: "Alayna Mueller", number:23, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 8, tackles: 74, assists: 11, metres: 470, kicks: 17}}
       ] },
       { key:'u20', name:'Under 20', female:false, coaches: [
-        {name: 'Nick Carter (Head Coach)', photo: 'image/nick_carter.jpg'},
-        {name: 'Ryan Brooks (Assistant)', photo: 'image/ryan_brooks.jpg'},
-        {name: 'Coach Kay (Analyst)', photo: 'image/coach_kay.jpg'}
+        {name: 'Nick Carter', position: 'Head Coach', photo: 'image/am.jpg', bio: 'Youth development specialist with a passion for nurturing young talent. Former provincial U20 coach.', stats: { experience: "9 Years", wins: "70%", developed: "50+ Players", provincial: "15 Selected" }},
+        {name: 'Ryan Brooks', position: 'Assistant Coach', photo: 'image/ryan_brooks.jpg', bio: 'Energetic coach who connects well with young players. Focuses on game understanding and decision making.', stats: { experience: "5 Years", wins: "68%", connection: "Excellent", decisions: "Improved 40%" }},
+        {name: 'Coach Kay', position: 'Performance Analyst', photo: 'image/coach_kay.jpg', bio: 'Specialist in youth performance analysis and development tracking. Uses data to optimize player growth.', stats: { experience: "3 Years", tracking: "200+ Players", growth: "Optimized", data: "Advanced Methods" }}
       ], seed: 404, players: [
-        {name: "Fallon Rodriguez", number:1, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 4, tackles: 88, assists: 7, metres: 410, kicks: 9}},
-        {name: "Henry Carrillo", number:2, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 3, tackles: 103, assists: 6, metres: 300, kicks: 5}},
-        {name: "Kaylani Arnold", number:3, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 4, tackles: 93, assists: 7, metres: 370, kicks: 4}},
-        {name: "Abraham Zavala", number:4, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 6, tackles: 78, assists: 9, metres: 500, kicks: 3}},
-        {name: "Liv Cochran", number:5, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 5, tackles: 86, assists: 8, metres: 440, kicks: 5}},
-        {name: "Danny Dickson", number:6, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 5, tackles: 83, assists: 8, metres: 470, kicks: 6}},
-        {name: "Emmalynn Grimes", number:7, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 2, tackles: 108, assists: 5, metres: 230, kicks: 4}},
-        {name: "Harlan Blankenship", number:8, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 7, tackles: 73, assists: 11, metres: 550, kicks: 8}},
-        {name: "Rosalee Lucero", number:9, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 9, tackles: 68, assists: 13, metres: 600, kicks: 22}},
-        {name: "Felipe Acosta", number:10, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 12, tackles: 58, assists: 15, metres: 670, kicks: 29}},
-        {name: "Kaia Peterson", number:11, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 15, tackles: 43, assists: 17, metres: 800, kicks: 6}},
-        {name: "Santiago O'Neill", number:12, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 8, tackles: 63, assists: 12, metres: 530, kicks: 19}},
-        {name: "Kenna Molina", number:13, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 11, tackles: 48, assists: 14, metres: 630, kicks: 13}},
-        {name: "Prince Garrison", number:14, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 13, tackles: 38, assists: 16, metres: 710, kicks: 10}},
-        {name: "Cadence Briggs", number:15, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 7, tackles: 60, assists: 11, metres: 500, kicks: 23}},
-        {name: "Case Quinn", number:16, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 2, tackles: 120, assists: 4, metres: 140, kicks: 2}},
-        {name: "Heaven Garrison", number:17, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 3, tackles: 113, assists: 5, metres: 180, kicks: 3}},
-        {name: "Noe Orr", number:18, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 1, tackles: 125, assists: 3, metres: 100, kicks: 1}},
-        {name: "Alaiya Woodward", number:19, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 4, tackles: 105, assists: 7, metres: 280, kicks: 5}},
-        {name: "Jeremias Santiago", number:20, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 5, tackles: 97, assists: 8, metres: 360, kicks: 6}},
-        {name: "Nyla Clayton", number:21, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 6, tackles: 90, assists: 9, metres: 430, kicks: 8}},
-        {name: "Boston Davidson", number:22, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 7, tackles: 83, assists: 10, metres: 480, kicks: 12}},
-        {name: "Jayla Fox", number:23, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 8, tackles: 77, assists: 11, metres: 460, kicks: 16}}
+        {name: "Fallon Rodriguez", number:1, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 4, tackles: 88, assists: 7, metres: 410, kicks: 9, dateOfBirth: "2005-03-15"}},
+        {name: "Henry Carrillo", number:2, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 3, tackles: 103, assists: 6, metres: 300, kicks: 5, dateOfBirth: "2004-11-22"}},
+        {name: "Kaylani Arnold", number:3, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 4, tackles: 93, assists: 7, metres: 370, kicks: 4, dateOfBirth: "2005-07-08"}},
+        {name: "Abraham Zavala", number:4, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 6, tackles: 78, assists: 9, metres: 500, kicks: 3, dateOfBirth: "2004-12-03"}},
+        {name: "Liv Cochran", number:5, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 5, tackles: 86, assists: 8, metres: 440, kicks: 5, dateOfBirth: "2005-01-19"}},
+        {name: "Danny Dickson", number:6, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 5, tackles: 83, assists: 8, metres: 470, kicks: 6, dateOfBirth: "2004-09-14"}},
+        {name: "Emmalynn Grimes", number:7, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 2, tackles: 108, assists: 5, metres: 230, kicks: 4, dateOfBirth: "2005-05-27"}},
+        {name: "Harlan Blankenship", number:8, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 7, tackles: 73, assists: 11, metres: 550, kicks: 8, dateOfBirth: "2004-08-11"}},
+        {name: "Laythim Arendse", number:9, photo: "image/la.jpg", stats: {tries: 9, tackles: 68, assists: 13, metres: 600, kicks: 22, dateOfBirth: "2005-02-06"}},
+        {name: "McDonald Gono", number:10, photo: "image/kk.jpg", stats: {tries: 0, tackles: 0, assists: 0, metres: 0, kicks: 0, dateOfBirth: "2006-05-04"}},
+        {name: "Kaia Peterson", number:11, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 15, tackles: 43, assists: 17, metres: 800, kicks: 6, dateOfBirth: "2005-04-12"}},
+        {name: "Santiago O'Neill", number:12, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 8, tackles: 63, assists: 12, metres: 530, kicks: 19, dateOfBirth: "2004-06-25"}},
+        {name: "Kenna Molina", number:13, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 11, tackles: 48, assists: 14, metres: 630, kicks: 13, dateOfBirth: "2005-08-30"}},
+        {name: "Prince Garrison", number:14, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 13, tackles: 38, assists: 16, metres: 710, kicks: 10, dateOfBirth: "2004-12-07"}},
+        {name: "Rayneil Tafel", number:15, photo: "image/rj.jpg", stats: {tries: 7, tackles: 60, assists: 11, metres: 500, kicks: 23, dateOfBirth: "2005-03-21"}},
+        {name: "Case Quinn", number:16, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 2, tackles: 120, assists: 4, metres: 140, kicks: 2, dateOfBirth: "2004-11-09"}},
+        {name: "Heaven Garrison", number:17, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 3, tackles: 113, assists: 5, metres: 180, kicks: 3, dateOfBirth: "2005-07-16"}},
+        {name: "Noe Orr", number:18, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 1, tackles: 125, assists: 3, metres: 100, kicks: 1, dateOfBirth: "2004-09-28"}},
+        {name: "Alaiya Woodward", number:19, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 4, tackles: 105, assists: 7, metres: 280, kicks: 5, dateOfBirth: "2005-01-04"}},
+        {name: "Jeremias Santiago", number:20, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 5, tackles: 97, assists: 8, metres: 360, kicks: 6, dateOfBirth: "2004-05-13"}},
+        {name: "Nyla Clayton", number:21, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 6, tackles: 90, assists: 9, metres: 430, kicks: 8, dateOfBirth: "2005-06-02"}},
+        {name: "Boston Davidson", number:22, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 7, tackles: 83, assists: 10, metres: 480, kicks: 12, dateOfBirth: "2004-08-24"}},
+        {name: "Jayla Fox", number:23, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 8, tackles: 77, assists: 11, metres: 460, kicks: 16, dateOfBirth: "2005-04-17"}}
       ] },
-      { key:'women', name:"Women’s Team", female:true, coaches: [
-        {name: 'Sara Kim (Head Coach)', photo: 'image/sara_kim.jpg'},
-        {name: 'Ashley Moore (Assistant)', photo: 'image/ashley_moore.jpg'}
+      { key:'women', name:"Women's Team", female:true, coaches: [
+        {name: 'Sara Kim', position: 'Head Coach', photo: 'image/sara_kim.jpg', bio: 'Pioneer in women\'s rugby with international playing experience. Leading the charge for women\'s rugby development.', stats: { experience: "12 Years", wins: "75%", international: "25 Caps", championships: "3 Won" }},
+        {name: 'Ashley Moore', position: 'Assistant Coach', photo: 'image/ashley_moore.jpg', bio: 'Former national team player with expertise in fitness and conditioning. Passionate about women\'s rugby growth.', stats: { experience: "6 Years", wins: "73%", fitness: "Elite Level", growth: "200% Participation" }}
       ], seed: 505, players: [
         {name: "Antonio Lucero", number:1, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 6, tackles: 85, assists: 9, metres: 420, kicks: 10}},
         {name: "Ila Hunter", number:2, photo: "image/352509247_1593737937768362_3758678116960265431_n.jpg", stats: {tries: 4, tackles: 98, assists: 7, metres: 350, kicks: 7}},
@@ -770,31 +1526,41 @@
         if(typeof c === 'string'){
           return `<span class="coach">👟 ${c}</span>`;
         } else {
-          return `<div class="coach-card">
-            <img src="${c.photo}" alt="${c.name}" class="coach-photo" />
+          const payload = encodeURIComponent(JSON.stringify(c));
+          return `<div class="coach-card" data-coach='${decodeURIComponent(payload)}' title="View profile" style="cursor: pointer;">
+            <img loading="lazy" src="${c.photo}" alt="${c.name}" class="coach-photo" />
             <span>${c.name}</span>
           </div>`;
         }
       }).join('');
-      const players = team.players.map(p=>playerCard(p)).join('');
+      const players = team.players.map(p=>playerCard(p, team.key)).join('');
       panelEl.innerHTML = `
         <div>
           <div class="coaches"><strong>Coaches:</strong> ${coaches}</div>
           <div class="players-grid">${players}</div>
         </div>
       `;
-      // bind cards
+      // bind player cards
       $$('.player-card', panelEl).forEach(card=>{
-        card.addEventListener('click', ()=>openPlayer(JSON.parse(card.dataset.player)));
+        card.addEventListener('click', ()=>{
+          const playerData = card.dataset.player.replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+          openPlayer(JSON.parse(playerData));
+        });
+      });
+      // bind coach cards
+      $$('.coach-card', panelEl).forEach(card=>{
+        if(card.dataset.coach) {
+          card.addEventListener('click', ()=>openCoach(JSON.parse(card.dataset.coach)));
+        }
       });
     }
 
     function playerCard(p){
-      const payload = encodeURIComponent(JSON.stringify(p));
+      const payload = JSON.stringify(p).replace(/'/g, '&#39;').replace(/"/g, '&quot;');
       return `
-        <div class="player-card" data-player='${decodeURIComponent(payload)}' title="View profile">
+        <div class="player-card" data-player='${payload}' title="View profile">
           <span class="jersey">#${p.number}</span>
-          <img src="${p.photo}" alt="${p.name}" loading="lazy" />
+          <img loading="lazy" src="${p.photo}" alt="${p.name}" loading="lazy" />
           <div class="player-info">
             <div class="player-name">${p.name}</div>
             <div class="player-sub">${p.position}</div>
@@ -805,20 +1571,27 @@
 
     function renderManagement(){
       const managementPanel = $('#managementPanel');
-      const staffCards = staffMembers.map(staff => `
-        <div class="staff-card">
-          <img src="${staff.photo}" alt="${staff.name}" class="staff-photo" />
+      const staffCards = staffMembers.map((staff, index) => {
+        const payload = encodeURIComponent(JSON.stringify(staff));
+        return `
+        <div class="staff-card" id="staff-${index}" data-staff='${decodeURIComponent(payload)}' title="View profile" style="cursor: pointer;">
+          <img loading="lazy" src="${staff.photo}" alt="${staff.name}" class="staff-photo" />
           <div class="staff-info">
             <div class="staff-name">${staff.name}</div>
             <div class="staff-position">${staff.position}</div>
             <div class="staff-bio">${staff.bio}</div>
           </div>
         </div>
-      `).join('');
+      `}).join('');
 
       managementPanel.innerHTML = `
         <div class="staff-grid">${staffCards}</div>
       `;
+      
+      // bind staff cards
+      $$('.staff-card', managementPanel).forEach(card=>{
+        card.addEventListener('click', ()=>openCoach(JSON.parse(card.dataset.staff)));
+      });
     }
 
     function renderEvents(){
@@ -831,8 +1604,8 @@
         </div>
       `).join('');
 
-      const eventCards = upcomingEvents.map(event => `
-        <div class="event-card">
+      const eventCards = upcomingEvents.map((event, index) => `
+        <div class="event-card" id="event-${index}">
           <div class="event-title">${event.title}</div>
           <div class="event-date">${event.date}</div>
           <div class="event-location">${event.location}</div>
@@ -861,9 +1634,9 @@
     function renderNews(){
       const newsPanel = $('#newsPanel');
 
-      const newsCards = newsItems.map(news => `
-        <div class="news-card">
-          <img src="${news.image}" alt="${news.title}" class="news-image" />
+      const newsCards = newsItems.map((news, index) => `
+        <div class="news-card" id="news-${index}">
+          <img loading="lazy" src="${news.image}" alt="${news.title}" class="news-image" />
           <div class="news-content">
             <h3 class="news-title">${news.title}</h3>
             <div class="news-meta">
@@ -904,12 +1677,45 @@
         ['Metres', p.stats.metres],
         ['Kicks', p.stats.kicks]
       ];
+      
+      // Add date of birth for Under 20 players
+      if (p.stats.dateOfBirth) {
+        const birthDate = new Date(p.stats.dateOfBirth);
+        const age = Math.floor((new Date() - birthDate) / (365.25 * 24 * 60 * 60 * 1000));
+        statMap.push(['Age', `${age} years`]);
+        statMap.push(['Born', p.stats.dateOfBirth]);
+      }
+      
       statMap.forEach(([k,v])=>{
         const div = document.createElement('div');
         div.className = 'stat';
-        div.innerHTML = `<div style="font-size:12px;opacity:.8">${k}</div><div style="font-size:20px;font-weight:800">${v}</div>`;
+        div.innerHTML = `<div style="font-size:12px;opacity:.8">${k}</div><div style="font-size:18px;font-weight:800">${v}</div>`;
         modalStats.appendChild(div);
       })
+      modal.classList.add('backdrop-show');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function openCoach(c){
+      modalPhoto.src = c.photo;
+      modalPhoto.alt = c.name;
+      modalName.textContent = c.name;
+      modalMeta.textContent = c.position;
+      modalBio.textContent = c.bio;
+      modalStats.innerHTML = '';
+      
+      // Create stats array from coach stats object
+      const statEntries = Object.entries(c.stats);
+      statEntries.forEach(([k,v])=>{
+        const div = document.createElement('div');
+        div.className = 'stat';
+        // Capitalize first letter of key
+        const displayKey = k.charAt(0).toUpperCase() + k.slice(1);
+        div.innerHTML = `<div style="font-size:12px;opacity:.8">${displayKey}</div><div style="font-size:18px;font-weight:800">${v}</div>`;
+        modalStats.appendChild(div);
+      });
+      
       modal.classList.add('backdrop-show');
       modal.setAttribute('aria-hidden','false');
       document.body.style.overflow = 'hidden';
@@ -932,12 +1738,1099 @@
     renderNews();
     renderManagement();
 
+    // Hide loading spinner
+    window.addEventListener('load', () => {
+      $('#loadingOverlay').classList.add('hidden');
+    });
+
     // ===== Customize WhatsApp number in ONE place =====
-    const WHATSAPP_NUMBER = '+27710483582'; // <-- change to your club number (international format, no + or spaces)
-    const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hi Bellville RFC, I would like to get in touch!')}`;
+    const WHATSAPP_NUMBER = '1234567890'; // <-- change to your club number (international format, no + or spaces)
+    const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hi Green & Gold RFC, I would like to get in touch!')}`;
     $('#waLink').href = waHref;
     $('#waFab').href = waHref;
+
+    // ===== GDPR COOKIE BANNER =====
+    const cookieBanner = $('#cookieBanner');
+    const cookieModal = $('#cookieModal');
+
+    function initCookieBanner() {
+      const cookieConsent = localStorage.getItem('cookieConsent');
+      if (!cookieConsent) {
+        setTimeout(() => {
+          cookieBanner.classList.add('show');
+        }, 2000); // Show after 2 seconds
+      }
+    }
+
+    function acceptAllCookies() {
+      localStorage.setItem('cookieConsent', 'accepted');
+      localStorage.setItem('analyticsCookies', 'true');
+      localStorage.setItem('marketingCookies', 'true');
+      localStorage.setItem('functionalCookies', 'true');
+      cookieBanner.classList.remove('show');
+      initializeCookies();
+    }
+
+    function rejectCookies() {
+      localStorage.setItem('cookieConsent', 'rejected');
+      localStorage.setItem('analyticsCookies', 'false');
+      localStorage.setItem('marketingCookies', 'false');
+      localStorage.setItem('functionalCookies', 'false');
+      cookieBanner.classList.remove('show');
+    }
+
+    function openCookieSettings() {
+      cookieModal.classList.add('show');
+      // Load current preferences
+      $('#analyticsCookies').checked = localStorage.getItem('analyticsCookies') === 'true';
+      $('#marketingCookies').checked = localStorage.getItem('marketingCookies') === 'true';
+      $('#functionalCookies').checked = localStorage.getItem('functionalCookies') === 'true';
+    }
+
+    function saveCookieSettings() {
+      localStorage.setItem('cookieConsent', 'custom');
+      localStorage.setItem('analyticsCookies', $('#analyticsCookies').checked);
+      localStorage.setItem('marketingCookies', $('#marketingCookies').checked);
+      localStorage.setItem('functionalCookies', $('#functionalCookies').checked);
+      cookieModal.classList.remove('show');
+      cookieBanner.classList.remove('show');
+      initializeCookies();
+    }
+
+    function closeCookieBanner() {
+      cookieBanner.classList.remove('show');
+    }
+
+    function initializeCookies() {
+      // Initialize Google Analytics if allowed
+      if (localStorage.getItem('analyticsCookies') === 'true') {
+        // Add Google Analytics code here
+        console.log('Analytics cookies enabled');
+      }
+
+      // Initialize marketing cookies if allowed
+      if (localStorage.getItem('marketingCookies') === 'true') {
+        // Add marketing tracking code here
+        console.log('Marketing cookies enabled');
+      }
+
+      // Initialize functional cookies if allowed
+      if (localStorage.getItem('functionalCookies') === 'true') {
+        // Add functional features here
+        console.log('Functional cookies enabled');
+      }
+    }
+
+    // Initialize cookie banner on page load
+    initCookieBanner();
+
+    // ===== PWA FUNCTIONALITY =====
+    let deferredPrompt;
+    const pwaInstallPrompt = $('#pwaInstallPrompt');
+    const offlineIndicator = $('#offlineIndicator');
+
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('SW registered: ', registration);
+          })
+          .catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+
+    // Handle PWA install prompt
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+
+      // Show install prompt if not dismissed before
+      if (!localStorage.getItem('pwaInstallDismissed')) {
+        setTimeout(() => {
+          pwaInstallPrompt.classList.add('show');
+        }, 3000); // Show after 3 seconds
+      }
+    });
+
+    // Handle successful installation
+    window.addEventListener('appinstalled', (evt) => {
+      console.log('PWA was installed successfully');
+      pwaInstallPrompt.classList.remove('show');
+    });
+
+    function installPWA() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+          } else {
+            console.log('User dismissed the install prompt');
+          }
+          deferredPrompt = null;
+          pwaInstallPrompt.classList.remove('show');
+        });
+      }
+    }
+
+    function dismissPWAPrompt() {
+      pwaInstallPrompt.classList.remove('show');
+      localStorage.setItem('pwaInstallDismissed', 'true');
+    }
+
+    // Handle online/offline status
+    function updateOnlineStatus() {
+      if (navigator.onLine) {
+        offlineIndicator.classList.remove('show');
+        console.log('Back online');
+      } else {
+        offlineIndicator.classList.add('show');
+        console.log('Gone offline');
+      }
+    }
+
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+
+    // Check initial online status
+    updateOnlineStatus();
+
+    // Push notification setup (requires user permission)
+    function rnz5UXKNZN4yKaBqkuBnEQF4aTS8N1j6TL() {
+      if ('Notification' in window && navigator.serviceWorker) {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            console.log('Notification permission granted');
+            // Register for push notifications
+            subscribeToPushNotifications();
+          }
+        });
+      }
+    }
+
+    function subscribeToPushNotifications() {
+      navigator.serviceWorker.ready.then(registration => {
+        // This would typically connect to your push service (like Firebase)
+        console.log('Push notifications ready');
+      });
+    }
+
+    // Request notification permission if user has analytics cookies enabled
+    if (localStorage.getItem('analyticsCookies') === 'true') {
+      rnz5UXKNZN4yKaBqkuBnEQF4aTS8N1j6TL();
+    }
+
+    // ===== CALENDAR FUNCTIONALITY =====
+    let currentDate = new Date();
+    let calendarView = 'month'; // 'month' or 'list'
+
+    // Sample calendar events
+    const calendarEvents = [
+      {
+        id: 1,
+        title: "Bellville RFC vs Constantia RFC",
+        date: "2024-12-14",
+        time: "15:00",
+        type: "match",
+        location: "Oaks Stadium",
+        description: "League match - First team"
+      },
+      {
+        id: 2,
+        title: "Training Session",
+        date: "2024-12-16",
+        time: "18:30",
+        type: "training",
+        location: "Oaks Stadium",
+        description: "Senior team training"
+      },
+      {
+        id: 3,
+        title: "Bellville RFC vs Wynberg RFC",
+        date: "2024-12-21",
+        time: "14:00",
+        type: "match",
+        location: "Wynberg Sports Club",
+        description: "League match - First team"
+      },
+      {
+        id: 4,
+        title: "Youth Training",
+        date: "2024-12-18",
+        time: "17:00",
+        type: "training",
+        location: "Bellville Sports Complex",
+        description: "U18 and U16 training"
+      },
+      {
+        id: 5,
+        title: "Club Social Event",
+        date: "2024-12-20",
+        time: "19:00",
+        type: "social",
+        location: "Clubhouse",
+        description: "End of year celebrations"
+      },
+      {
+        id: 6,
+        title: "Bellville RFC vs False Bay RFC",
+        date: "2025-01-11",
+        time: "15:00",
+        type: "match",
+        location: "Oaks Stadium",
+        description: "League match - First team"
+      }
+    ];
+
+    function renderCalendar() {
+      const calendarTitle = $('#calendarTitle');
+      const calendarContent = $('#calendarContent');
+
+      calendarTitle.textContent = currentDate.toLocaleDateString('en-ZA', {
+        month: 'long',
+        year: 'numeric'
+      });
+
+      if (calendarView === 'month') {
+        calendarContent.innerHTML = renderMonthView();
+      } else {
+        calendarContent.innerHTML = renderListView();
+      }
+    }
+
+    function renderMonthView() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const startDate = new Date(firstDay);
+      startDate.setDate(startDate.getDate() - firstDay.getDay());
+
+      const endDate = new Date(lastDay);
+      endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()));
+
+      let html = `
+        <div class="calendar-grid">
+          <div class="calendar-day-header">Sun</div>
+          <div class="calendar-day-header">Mon</div>
+          <div class="calendar-day-header">Tue</div>
+          <div class="calendar-day-header">Wed</div>
+          <div class="calendar-day-header">Thu</div>
+          <div class="calendar-day-header">Fri</div>
+          <div class="calendar-day-header">Sat</div>
+      `;
+
+      const today = new Date();
+      const currentDateIter = new Date(startDate);
+
+      while (currentDateIter <= endDate) {
+        const dayEvents = calendarEvents.filter(event =>
+          event.date === currentDateIter.toISOString().split('T')[0]
+        );
+
+        const isToday = currentDateIter.toDateString() === today.toDateString();
+        const isCurrentMonth = currentDateIter.getMonth() === month;
+
+        html += `
+          <div class="calendar-day ${isToday ? 'today' : ''} ${!isCurrentMonth ? 'other-month' : ''}" onclick="showDayEvents('${currentDateIter.toISOString().split('T')[0]}')">
+            <div class="calendar-day-number">${currentDateIter.getDate()}</div>
+            <div class="calendar-events">
+              ${dayEvents.slice(0, 2).map(event => `
+                <div class="calendar-event ${event.type}">${event.title.length > 15 ? event.title.substring(0, 15) + '...' : event.title}</div>
+              `).join('')}
+              ${dayEvents.length > 2 ? `<div class="calendar-event">+${dayEvents.length - 2} more</div>` : ''}
+            </div>
+          </div>
+        `;
+
+        currentDateIter.setDate(currentDateIter.getDate() + 1);
+      }
+
+      html += '</div>';
+      return html;
+    }
+
+    function renderListView() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+
+      const monthEvents = calendarEvents.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate.getFullYear() === year && eventDate.getMonth() === month;
+      }).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      if (monthEvents.length === 0) {
+        return '<div style="text-align:center;padding:40px;opacity:.7">No events scheduled for this month</div>';
+      }
+
+      return `
+        <div class="calendar-list-view">
+          ${monthEvents.map(event => {
+            const eventDate = new Date(event.date);
+            return `
+              <div class="calendar-list-item">
+                <div class="calendar-list-date">
+                  <div style="font-weight:700;font-size:18px">${eventDate.getDate()}</div>
+                  <div style="font-size:12px">${eventDate.toLocaleDateString('en-ZA', { weekday: 'short' })}</div>
+                </div>
+                <div class="calendar-list-content">
+                  <div class="calendar-list-title">${event.title}</div>
+                  <div class="calendar-list-details">
+                    <div>🕐 ${event.time} • 📍 ${event.location}</div>
+                    <div style="margin-top:5px">${event.description}</div>
+                  </div>
+                  <div class="calendar-list-actions">
+                    <button class="calendar-list-btn" onclick="viewEventDetails(${event.id})">View Details</button>
+                    <button class="calendar-list-btn google" onclick="addToGoogleCalendar('${event.title}', '${event.date}', '${event.time}', '${event.location}', '${event.description}')">Add to Google Calendar</button>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function setCalendarView(view) {
+      calendarView = view;
+      $$('.view-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderCalendar();
+    }
+
+    function showDayEvents(date) {
+      const dayEvents = calendarEvents.filter(event => event.date === date);
+      if (dayEvents.length === 0) return;
+
+      // For now, just scroll to the list view and show that day's events
+      calendarView = 'list';
+      $$('.view-btn').forEach(btn => btn.classList.remove('active'));
+      $$('.view-btn')[1].classList.add('active'); // List view button
+      renderCalendar();
+    }
+
+    function viewEventDetails(eventId) {
+      const event = calendarEvents.find(e => e.id === eventId);
+      if (event) {
+        alert(`Event Details:\n\n${event.title}\nDate: ${event.date}\nTime: ${event.time}\nLocation: ${event.location}\n\n${event.description}`);
+      }
+    }
+
+    function addToGoogleCalendar(title, date, time, location, description) {
+      const startDate = new Date(`${date}T${time}`);
+      const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000); // 2 hours duration
+
+      const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z/${endDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z&location=${encodeURIComponent(location)}&details=${encodeURIComponent(description)}`;
+
+      window.open(googleCalendarUrl, '_blank');
+    }
+
+    function changeMonth(direction) {
+      currentDate.setMonth(currentDate.getMonth() + direction);
+      renderCalendar();
+    }
+
+    // Initialize calendar
+    renderCalendar();
+
+    // Calendar navigation
+    $('#prevMonth').addEventListener('click', () => changeMonth(-1));
+    $('#nextMonth').addEventListener('click', () => changeMonth(1));
+
+    // ===== ADMIN SYSTEM =====
+    const ADMIN_PASSWORD = "84626047140";
+    let isAdminLoggedIn = false;
+
+    // Check if admin is already logged in (from sessionStorage)
+    function checkAdminStatus() {
+      const adminStatus = sessionStorage.getItem('adminLoggedIn');
+      if (adminStatus === 'true') {
+        isAdminLoggedIn = true;
+        $('#adminBtn').textContent = '👑'; // Crown icon when logged in
+        $('#adminBtn').title = 'Admin Panel (Logged In)';
+      } else {
+        $('#adminBtn').textContent = '⚙️'; // Settings icon when not logged in
+        $('#adminBtn').title = 'Admin Login';
+      }
+    }
+
+    // Show admin login modal
+    function showAdminLogin() {
+      $('#adminLoginModal').classList.add('show');
+      $('#adminPassword').focus();
+    }
+
+    // Check admin password
+    function checkAdminPassword() {
+      const password = $('#adminPassword').value;
+      if (password === ADMIN_PASSWORD) {
+        isAdminLoggedIn = true;
+        sessionStorage.setItem('adminLoggedIn', 'true');
+        $('#adminLoginModal').classList.remove('show');
+        $('#adminBtn').textContent = '👑'; // Crown icon when logged in
+        $('#adminBtn').title = 'Admin Panel (Logged In)';
+        $('#adminPassword').value = '';
+        loadAdminPanel();
+      } else {
+        alert('Incorrect password. Access denied.');
+        $('#adminPassword').value = '';
+      }
+    }
+
+    // Close admin login modal
+    function closeAdminLogin() {
+      $('#adminLoginModal').classList.remove('show');
+      $('#adminPassword').value = '';
+    }
+
+    // Load admin panel data
+    function loadAdminPanel() {
+      const select = $('#adminMatchSelect');
+      select.innerHTML = '<option value="">Choose a match...</option>';
+
+      liveMatches.forEach((match, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = `${match.homeTeam} vs ${match.awayTeam} (${match.status})`;
+        select.appendChild(option);
+      });
+    }
+
+    // Update match from admin panel
+    function updateMatchFromAdmin() {
+      const matchIndex = parseInt($('#adminMatchSelect').value);
+      if (isNaN(matchIndex)) {
+        alert('Please select a match first.');
+        return;
+      }
+
+      const homeScore = parseInt($('#adminHomeScore').value) || 0;
+      const awayScore = parseInt($('#adminAwayScore').value) || 0;
+      const minute = parseInt($('#adminMatchMinute').value) || 0;
+      const status = $('#adminMatchStatus').value;
+
+      liveMatches[matchIndex].homeScore = homeScore;
+      liveMatches[matchIndex].awayScore = awayScore;
+      liveMatches[matchIndex].minute = minute;
+      liveMatches[matchIndex].status = status;
+
+      refreshLiveScores();
+      alert('Match updated successfully!');
+    }
+
+    // Add match event
+    function addMatchEvent() {
+      const matchIndex = parseInt($('#adminMatchSelect').value);
+      if (isNaN(matchIndex)) {
+        alert('Please select a match first.');
+        return;
+      }
+
+      const eventType = $('#eventType').value;
+      const player = $('#eventPlayer').value.trim();
+      const team = $('#eventTeam').value;
+
+      if (!player) {
+        alert('Please enter a player name.');
+        return;
+      }
+
+      const event = {
+        time: `${liveMatches[matchIndex].minute || 0}'`,
+        type: eventType,
+        player: player,
+        team: team
+      };
+
+      liveMatches[matchIndex].events.push(event);
+      refreshLiveScores();
+
+      // Clear form
+      $('#eventPlayer').value = '';
+
+      alert('Event added successfully!');
+    }
+
+    // Start a random match for testing
+    function startRandomMatch() {
+      const upcomingMatches = liveMatches.filter(m => m.status === 'UPCOMING');
+      if (upcomingMatches.length === 0) {
+        alert('No upcoming matches available.');
+        return;
+      }
+
+      const randomMatch = upcomingMatches[Math.floor(Math.random() * upcomingMatches.length)];
+      const matchIndex = liveMatches.indexOf(randomMatch);
+
+      liveMatches[matchIndex].status = 'LIVE';
+      liveMatches[matchIndex].minute = 1;
+      liveMatches[matchIndex].homeScore = 0;
+      liveMatches[matchIndex].awayScore = 0;
+      liveMatches[matchIndex].events = [];
+
+      refreshLiveScores();
+      alert(`Started match: ${randomMatch.homeTeam} vs ${randomMatch.awayTeam}`);
+    }
+
+    // Simulate match progress
+    function simulateMatchProgress() {
+      const liveMatch = liveMatches.find(m => m.status === 'LIVE');
+      if (!liveMatch) {
+        alert('No live match to simulate.');
+        return;
+      }
+
+      const matchIndex = liveMatches.indexOf(liveMatch);
+
+      // Simulate some time passing
+      liveMatches[matchIndex].minute += Math.floor(Math.random() * 15) + 5;
+
+      // Simulate some scoring
+      if (Math.random() < 0.3) { // 30% chance of scoring
+        const scoringTeam = Math.random() < 0.5 ? 'home' : 'away';
+        const points = Math.random() < 0.7 ? 5 : 7; // 5 for try, 7 for try+conversion
+
+        if (scoringTeam === 'home') {
+          liveMatches[matchIndex].homeScore += points;
+        } else {
+          liveMatches[matchIndex].awayScore += points;
+        }
+
+        // Add scoring event
+        liveMatches[matchIndex].events.push({
+          time: `${liveMatches[matchIndex].minute}'`,
+          type: points === 5 ? 'TRY' : 'TRY',
+          player: scoringTeam === 'home' ? liveMatch.homeTeam + ' Player' : liveMatch.awayTeam + ' Player',
+          team: scoringTeam
+        });
+      }
+
+      // End match if time is up
+      if (liveMatches[matchIndex].minute >= 80) {
+        liveMatches[matchIndex].status = 'FINISHED';
+      }
+
+      refreshLiveScores();
+    }
+
+    // Reset all matches
+    function resetAllMatches() {
+      if (!confirm('Are you sure you want to reset all matches? This will clear all scores and events.')) {
+        return;
+      }
+
+      liveMatches.forEach(match => {
+        match.status = 'UPCOMING';
+        match.homeScore = 0;
+        match.awayScore = 0;
+        match.minute = 0;
+        match.events = [];
+      });
+
+      refreshLiveScores();
+      alert('All matches have been reset.');
+    }
+
+    // Open admin panel
+    function openAdminPanel() {
+      if (!isAdminLoggedIn) {
+        showAdminLogin();
+        return;
+      }
+
+      $('#adminPanel').classList.add('show');
+      loadAdminPanel();
+    }
+
+    // Close admin panel
+    function closeAdminPanel() {
+      $('#adminPanel').classList.remove('show');
+    }
+
+    // Logout admin
+    function logoutAdmin() {
+      isAdminLoggedIn = false;
+      sessionStorage.removeItem('adminLoggedIn');
+      $('#adminBtn').textContent = '⚙️'; // Settings icon when logged out
+      $('#adminBtn').title = 'Admin Login';
+      closeAdminPanel();
+      alert('Admin logged out successfully.');
+    }
+
+    // Initialize admin system
+    checkAdminStatus();
+
+    // Admin button click handler
+    $('#adminBtn').addEventListener('click', openAdminPanel);
+
+    // Enter key handler for password input
+    $('#adminPassword').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        checkAdminPassword();
+      }
+    });
+
+    // ===== LIVE SCORES FUNCTIONALITY =====
+    let liveMatches = [
+      {
+        id: 1,
+        homeTeam: "Bellville RFC",
+        awayTeam: "Constantia RFC",
+        homeScore: 28,
+        awayScore: 15,
+        status: "LIVE",
+        minute: 67,
+        venue: "Oaks Stadium",
+        events: [
+          { time: "12'", type: "TRY", player: "Conner Calhoun", team: "home" },
+          { time: "25'", type: "CONVERSION", player: "Conner Calhoun", team: "home" },
+          { time: "34'", type: "TRY", player: "Ephraim Hunter", team: "home" },
+          { time: "45'", type: "PENALTY", player: "Conner Calhoun", team: "home" },
+          { time: "67'", type: "TRY", player: "Kye Washington", team: "away" }
+        ]
+      },
+      {
+        id: 2,
+        homeTeam: "Bellville RFC U20",
+        awayTeam: "Wynberg RFC U20",
+        homeScore: 0,
+        awayScore: 0,
+        status: "UPCOMING",
+        kickoff: "15:00",
+        venue: "Bellville Sports Complex"
+      }
+    ];
+
+    function renderLiveScores() {
+      const container = $('#liveMatchesContainer');
+
+      if (liveMatches.length === 0) {
+        container.innerHTML = '<div class="no-live-matches">No live matches at the moment</div>';
+        return;
+      }
+
+      const matchesHTML = liveMatches.map(match => {
+        const isLive = match.status === 'LIVE';
+        const matchClass = isLive ? 'live-match live' : 'live-match';
+
+        let eventsHTML = '';
+        if (match.events && match.events.length > 0) {
+          eventsHTML = `
+            <div class="match-events">
+              ${match.events.slice(-3).map(event => `
+                <div class="match-event">
+                  <span class="event-time">${event.time}</span>
+                  <span class="event-description">
+                    <span class="event-player">${event.player}</span> - ${event.type}
+                  </span>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        }
+
+        return `
+          <div class="${matchClass}">
+            <div class="match-header">
+              <span class="match-status ${isLive ? 'live' : ''}">${match.status}</span>
+              ${isLive ? `<span>🔴 ${match.minute}'</span>` : `<span>🕐 ${match.kickoff}</span>`}
+            </div>
+            <div class="match-teams">
+              <div class="team">
+                <span class="team-name">${match.homeTeam}</span>
+                <span class="team-score">${match.homeScore}</span>
+              </div>
+              <div style="font-size:20px;font-weight:600;margin:0 15px">VS</div>
+              <div class="team">
+                <span class="team-name">${match.awayTeam}</span>
+                <span class="team-score">${match.awayScore}</span>
+              </div>
+            </div>
+            <div class="match-details">${match.venue}</div>
+            ${eventsHTML}
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = matchesHTML;
+    }
+
+    function refreshLiveScores() {
+      // Simulate API call - in real implementation, this would fetch from your backend
+      const refreshBtn = event.target;
+      refreshBtn.textContent = '⏳ Updating...';
+      refreshBtn.disabled = true;
+
+      setTimeout(() => {
+        // Simulate score updates
+        if (liveMatches[0] && liveMatches[0].status === 'LIVE') {
+          liveMatches[0].homeScore = Math.floor(Math.random() * 50) + 20;
+          liveMatches[0].awayScore = Math.floor(Math.random() * 30) + 10;
+          liveMatches[0].minute = Math.min(80, liveMatches[0].minute + Math.floor(Math.random() * 5) + 1);
+        }
+
+        renderLiveScores();
+        refreshBtn.textContent = '🔄 Refresh Scores';
+        refreshBtn.disabled = false;
+      }, 1000);
+    }
+
+    // Initialize live scores
+    renderLiveScores();
+
+    // Auto-refresh live matches every 30 seconds
+    setInterval(() => {
+      const hasLiveMatches = liveMatches.some(match => match.status === 'LIVE');
+      if (hasLiveMatches) {
+        refreshLiveScores();
+      }
+    }, 30000);
+
+    // ===== PLAYER STATISTICS FUNCTIONALITY =====
+    const playerStatsContainer = $('#playerStatsContainer');
+    let currentPlayerStats = null;
+
+    // Enhanced player data with detailed stats
+    const enhancedPlayers = teams.flatMap(team =>
+      team.players.map(player => ({
+        ...player,
+        team: team.name,
+        detailedStats: {
+          gamesPlayed: Math.floor(Math.random() * 15) + 5,
+          minutesPlayed: Math.floor(Math.random() * 1200) + 600,
+          tacklesCompleted: player.stats.tackles,
+          tacklesMissed: Math.floor(Math.random() * 20),
+          carries: Math.floor(Math.random() * 50) + 20,
+          metresGained: player.stats.metres,
+          lineBreaks: Math.floor(Math.random() * 8),
+          offloads: Math.floor(Math.random() * 12),
+          turnovers: Math.floor(Math.random() * 5),
+          penalties: Math.floor(Math.random() * 3),
+          yellowCards: Math.floor(Math.random() * 2),
+          redCards: 0
+        }
+      }))
+    );
+
+    function renderPlayerStats() {
+      // Find top performers
+      const topTryScorers = [...enhancedPlayers].sort((a, b) => b.stats.tries - a.stats.tries).slice(0, 5);
+      const topTackleKings = [...enhancedPlayers].sort((a, b) => b.stats.tackles - a.stats.tackles).slice(0, 5);
+      const topMetreGainers = [...enhancedPlayers].sort((a, b) => b.stats.metres - a.stats.metres).slice(0, 5);
+
+      const statsHTML = `
+        <div class="stats-sidebar">
+          <div class="player-profile">
+            <img src="image/352509247_1593737937768362_3758678116960265431_n.jpg" alt="Top Player" class="player-avatar">
+            <div class="player-name">Conner Calhoun</div>
+            <div class="player-position">Fly-half</div>
+          </div>
+          <div class="stats-list">
+            <div class="stat-item">
+              <span class="stat-name">Games Played</span>
+              <span class="stat-number">15</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-name">Tries Scored</span>
+              <span class="stat-number">15</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-name">Tackles</span>
+              <span class="stat-number">65</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-name">Metres Gained</span>
+              <span class="stat-number">720</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-name">Kicks</span>
+              <span class="stat-number">45</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-main">
+          <div class="stats-tabs">
+            <button class="stats-tab active" onclick="showStatsTab('tries')">Tries</button>
+            <button class="stats-tab" onclick="showStatsTab('tackles')">Tackles</button>
+            <button class="stats-tab" onclick="showStatsTab('metres')">Metres</button>
+            <button class="stats-tab" onclick="showStatsTab('performance')">Performance</button>
+          </div>
+
+          <div id="statsContent">
+            ${renderTriesChart(topTryScorers)}
+          </div>
+        </div>
+      `;
+
+      playerStatsContainer.innerHTML = statsHTML;
+    }
+
+    function renderTriesChart(players) {
+      const maxTries = Math.max(...players.map(p => p.stats.tries));
+      return `
+        <div class="chart-container">
+          <h3 class="chart-title">Top Try Scorers</h3>
+          <div class="bar-chart">
+            ${players.map(player => `
+              <div class="bar-item">
+                <span class="bar-label">${player.name}</span>
+                <div class="bar-container">
+                  <div class="bar-fill" style="width: ${(player.stats.tries / maxTries) * 100}%"></div>
+                </div>
+                <span class="bar-value">${player.stats.tries}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTacklesChart(players) {
+      const maxTackles = Math.max(...players.map(p => p.stats.tackles));
+      return `
+        <div class="chart-container">
+          <h3 class="chart-title">Top Tackle Kings</h3>
+          <div class="bar-chart">
+            ${players.map(player => `
+              <div class="bar-item">
+                <span class="bar-label">${player.name}</span>
+                <div class="bar-container">
+                  <div class="bar-fill" style="width: ${(player.stats.tackles / maxTackles) * 100}%"></div>
+                </div>
+                <span class="bar-value">${player.stats.tackles}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderMetresChart(players) {
+      const maxMetres = Math.max(...players.map(p => p.stats.metres));
+      return `
+        <div class="chart-container">
+          <h3 class="chart-title">Top Metre Gainers</h3>
+          <div class="bar-chart">
+            ${players.map(player => `
+              <div class="bar-item">
+                <span class="bar-label">${player.name}</span>
+                <div class="bar-container">
+                  <div class="bar-fill" style="width: ${(player.stats.metres / maxMetres) * 100}%"></div>
+                </div>
+                <span class="bar-value">${player.stats.metres}m</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderPerformanceChart() {
+      return `
+        <div class="chart-container">
+          <h3 class="chart-title">Team Performance Overview</h3>
+          <div class="progress-chart">
+            <div class="progress-item">
+              <div class="progress-circle">
+                <svg>
+                  <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
+                  <circle class="progress-fill" cx="50" cy="50" r="45" style="stroke-dashoffset: ${283 - (283 * 0.85)}"></circle>
+                </svg>
+                <div class="progress-text">85%</div>
+              </div>
+              <div class="progress-label">Tackle Success</div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-circle">
+                <svg>
+                  <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
+                  <circle class="progress-fill" cx="50" cy="50" r="45" style="stroke-dashoffset: ${283 - (283 * 0.72)}"></circle>
+                </svg>
+                <div class="progress-text">72%</div>
+              </div>
+              <div class="progress-label">Lineout Success</div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-circle">
+                <svg>
+                  <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
+                  <circle class="progress-fill" cx="50" cy="50" r="45" style="stroke-dashoffset: ${283 - (283 * 0.68)}"></circle>
+                </svg>
+                <div class="progress-text">68%</div>
+              </div>
+              <div class="progress-label">Scrum Success</div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-circle">
+                <svg>
+                  <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
+                  <circle class="progress-fill" cx="50" cy="50" r="45" style="stroke-dashoffset: ${283 - (283 * 0.91)}"></circle>
+                </svg>
+                <div class="progress-text">91%</div>
+              </div>
+              <div class="progress-label">Discipline</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparison-section">
+          <h3 class="chart-title">Team Comparison</h3>
+          <div class="comparison-grid">
+            <div class="comparison-card">
+              <h4 class="comparison-title">Offensive Stats</h4>
+              <div class="comparison-item">
+                <span class="comparison-label">Total Tries</span>
+                <span class="comparison-value">247</span>
+              </div>
+              <div class="comparison-item">
+                <span class="comparison-label">Metres Gained</span>
+                <span class="comparison-value">86,543m</span>
+              </div>
+              <div class="comparison-item">
+                <span class="comparison-label">Line Breaks</span>
+                <span class="comparison-value">89</span>
+              </div>
+            </div>
+            <div class="comparison-card">
+              <h4 class="comparison-title">Defensive Stats</h4>
+              <div class="comparison-item">
+                <span class="comparison-label">Tackles Made</span>
+                <span class="comparison-value">8,543</span>
+              </div>
+              <div class="comparison-item">
+                <span class="comparison-label">Turnovers Won</span>
+                <span class="comparison-value">156</span>
+              </div>
+              <div class="comparison-item">
+                <span class="comparison-label">Penalties Conceded</span>
+                <span class="comparison-value">87</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function showStatsTab(tabName) {
+      const tabs = $$('.stats-tab');
+      const content = $('#statsContent');
+
+      tabs.forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const topTryScorers = [...enhancedPlayers].sort((a, b) => b.stats.tries - a.stats.tries).slice(0, 5);
+      const topTackleKings = [...enhancedPlayers].sort((a, b) => b.stats.tackles - a.stats.tackles).slice(0, 5);
+      const topMetreGainers = [...enhancedPlayers].sort((a, b) => b.stats.metres - a.stats.metres).slice(0, 5);
+
+      switch(tabName) {
+        case 'tries':
+          content.innerHTML = renderTriesChart(topTryScorers);
+          break;
+        case 'tackles':
+          content.innerHTML = renderTacklesChart(topTackleKings);
+          break;
+        case 'metres':
+          content.innerHTML = renderMetresChart(topMetreGainers);
+          break;
+        case 'performance':
+          content.innerHTML = renderPerformanceChart();
+          break;
+      }
+    }
+
+    // Initialize player stats
+    renderPlayerStats();
+
+    // ===== SEARCH FUNCTIONALITY =====
+    const searchInput = $('#searchInput');
+    const searchResults = $('#searchResults');
+    let currentSearchResults = [];
+
+    // Collect only player content for search
+    const searchableContent = teams.flatMap(team =>
+      team.players.map((player, index) => ({
+        type: 'Player',
+        title: player.name,
+        content: player.bio,
+        link: '#teams',
+        team: team.name,
+        id: `player-${team.key}-${player.number}`,
+        playerData: player
+      }))
+    );
+
+    function performSearch(query) {
+      if (query.length < 2) {
+        searchResults.style.display = 'none';
+        return;
+      }
+
+      const results = searchableContent.filter(item =>
+        item.title.toLowerCase().includes(query.toLowerCase()) ||
+        item.team.toLowerCase().includes(query.toLowerCase()) ||
+        item.playerData.position.toLowerCase().includes(query.toLowerCase()) ||
+        item.playerData.number.toString().includes(query)
+      ).slice(0, 10); // Limit to 10 results
+
+      currentSearchResults = results; // Store results for click handler
+
+      if (results.length === 0) {
+        searchResults.innerHTML = '<div class="no-results">No results found</div>';
+        searchResults.style.display = 'block';
+        return;
+      }
+
+      const resultsHTML = results.map((result, index) => `
+        <div class="search-result" data-result-index="${index}" onclick="handleSearchResult(${index})">
+          <div class="search-result-title">${result.title}</div>
+          <div class="search-result-type">${result.team} • #${result.playerData.number} ${result.playerData.position}</div>
+        </div>
+      `).join('');
+
+      searchResults.innerHTML = resultsHTML;
+      searchResults.style.display = 'block';
+    }
+
+    function handleSearchResult(index) {
+      const result = currentSearchResults[index];
+      if (!result) return;
+
+      searchResults.style.display = 'none';
+      searchInput.value = '';
+
+      // Open player modal directly
+      openPlayer(result.playerData);
+    }
+
+    function scrollToSection(link) {
+      const targetId = link.replace('#', '');
+      const targetElement = $(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Debounce search input
+    let searchTimeout;
+    searchInput.addEventListener('input', (e) => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => performSearch(e.target.value), 300);
+    });
+
+    // Hide results when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.style.display = 'none';
+      }
+    });
+
+    // Initialize search with empty results
+    performSearch('');
   </script>
 </body>
 </html>
-
