@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
   <title>Bellville RFC - Green & Gold Rugby Club</title>
   <meta name="description" content="Official website of Bellville RFC (Green & Gold Rugby Club). View teams, players, training schedules, news, and contact information for our competitive rugby club in Bellville." />
   <meta name="keywords" content="Bellville RFC, rugby club, Green & Gold, Bellville rugby, South African rugby, rugby teams, rugby training" />
@@ -89,6 +89,26 @@
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,\"Noto Sans\",sans-serif;background:linear-gradient(180deg,rgba(10,15,14,0.9),rgba(8,18,15,0.9)),url('image/352509247_1593737937768362_3758678116960265431_n.jpg');background-size:cover;background-position:center;background-attachment:fixed;color:var(--text);}
+
+    /* Mobile-specific touch improvements */
+    @media (hover:none) and (pointer:coarse){
+        .btn-primary:active,.btn-outline:active,.tab:active,.social-icon:active,.player-card:active,.staff-card:active,.gallery-item:active{
+            transform:scale(0.98);
+            transition:transform 0.1s ease;
+        }
+        .search-result:active{
+            background:rgba(11,61,46,.2);
+        }
+        .calendar-day:active{
+            background:rgba(11,61,46,.6);
+        }
+    }
+
+    /* Prevent horizontal scroll on mobile */
+    @media (max-width:768px){
+        body{overflow-x:hidden;}
+        .container{max-width:100%;padding:0 16px;}
+    }
     a{color:inherit}
     .container{max-width:1200px;margin:0 auto;padding:24px}
 
@@ -191,91 +211,333 @@
     @media (max-width:768px){
         .nav{
             flex-direction:column;
-            gap:12px;
-            padding:16px;
+            gap:16px;
+            padding:20px;
             position:relative;
         }
         .brand{
             text-align:center;
-            margin-bottom:8px;
+            margin-bottom:12px;
+        }
+        .brand h1{
+            font-size:20px;
+            margin-bottom:4px;
         }
         .actions{
             display:flex;
             flex-wrap:wrap;
             justify-content:center;
-            gap:8px;
+            gap:10px;
             width:100%;
         }
         .actions a{
             flex:1;
-            min-width:120px;
+            min-width:140px;
             text-align:center;
-            padding:10px 12px;
-            font-size:14px;
+            padding:12px 16px;
+            font-size:15px;
+            min-height:44px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
         }
-        .hero .wrap{gap:16px;padding:32px 16px}
-        .hero h2{font-size:32px}
-        .players-grid{grid-template-columns:repeat(2,1fr)}
-        .staff-grid{grid-template-columns:repeat(2,1fr)}
-        .news-grid{grid-template-columns:repeat(2,1fr)}
-        .social-media{gap:12px}
-        .social-icon{width:44px;height:44px}
+        .hero .wrap{gap:20px;padding:40px 20px}
+        .hero h2{font-size:34px;line-height:1.2}
+        .hero p{font-size:16px;line-height:1.5}
+        .players-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+        .staff-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+        .news-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+        .social-media{gap:16px}
+        .social-icon{width:48px;height:48px}
+        .btn-primary,.btn-outline{
+            padding:14px 20px;
+            font-size:16px;
+            min-height:48px;
+        }
+        .section-title h3{font-size:24px}
+        .card{padding:20px}
     }
 
     /* Mobile portrait */
     @media (max-width:480px){
         .container{padding:16px}
-        .nav{padding:12px}
-        .brand{margin-bottom:12px}
+        .nav{
+            padding:16px;
+            gap:12px;
+        }
+        .brand{
+            margin-bottom:16px;
+            text-align:center;
+        }
+        .brand h1{
+            font-size:18px;
+            margin-bottom:6px;
+        }
+        .logo{
+            width:36px;
+            height:36px;
+        }
         .actions{
-            gap:6px;
-            justify-content:space-between;
+            gap:8px;
+            justify-content:center;
+            flex-wrap:wrap;
         }
         .actions a{
             flex:1;
-            min-width:100px;
-            padding:8px 10px;
-            font-size:13px;
+            min-width:120px;
+            padding:12px 14px;
+            font-size:14px;
+            min-height:44px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
         }
-        .hero .wrap{padding:24px 12px}
-        .hero h2{font-size:28px;line-height:1.2}
-        .hero p{font-size:16px}
-        .players-grid{grid-template-columns:1fr}
-        .staff-grid{grid-template-columns:1fr}
-        .news-grid{grid-template-columns:1fr}
-        .news-card{padding:16px}
-        .news-title{font-size:18px}
-        .social-icon{width:40px;height:40px}
-        .btn-primary,.btn-outline{padding:10px 16px;font-size:14px}
-        .section-title h3{font-size:22px}
-        .modal{max-width:95vw}
-        .modal-content{padding:16px}
-        .close-btn{top:12px;right:12px}
+        .hero .wrap{
+            padding:32px 16px;
+            gap:24px;
+        }
+        .hero h2{
+            font-size:30px;
+            line-height:1.2;
+            margin-bottom:16px;
+        }
+        .hero p{
+            font-size:16px;
+            line-height:1.5;
+        }
+        .players-grid{
+            grid-template-columns:1fr;
+            gap:16px;
+        }
+        .staff-grid{
+            grid-template-columns:1fr;
+            gap:16px;
+        }
+        .news-grid{
+            grid-template-columns:1fr;
+            gap:16px;
+        }
+        .news-card{
+            padding:16px;
+        }
+        .news-title{
+            font-size:18px;
+            line-height:1.3;
+        }
+        .social-media{
+            gap:12px;
+            justify-content:center;
+        }
+        .social-icon{
+            width:44px;
+            height:44px;
+        }
+        .btn-primary,.btn-outline{
+            padding:14px 18px;
+            font-size:16px;
+            min-height:48px;
+            width:100%;
+            margin-bottom:8px;
+        }
+        .section-title h3{
+            font-size:24px;
+            margin-bottom:20px;
+        }
+        .modal{
+            max-width:95vw;
+            max-height:90vh;
+            margin:20px auto;
+        }
+        .modal-content{
+            padding:20px;
+        }
+        .close-btn{
+            top:16px;
+            right:16px;
+            width:32px;
+            height:32px;
+            font-size:18px;
+        }
+        .stats-grid{
+            grid-template-columns:1fr;
+            gap:12px;
+        }
+        .stat{
+            padding:12px;
+            text-align:center;
+        }
+        .fixtures-container{
+            grid-template-columns:1fr;
+            gap:20px;
+        }
+        .events-container{
+            grid-template-columns:1fr;
+            gap:20px;
+        }
+        .contact-card{
+            padding:20px;
+        }
+        .contact-row{
+            margin-bottom:12px;
+        }
+        .map{
+            height:200px;
+        }
+    }
+
+    /* Landscape orientation specific adjustments */
+    @media (max-height:500px) and (orientation:landscape){
+        .hero .wrap{
+            grid-template-columns:1fr 1fr;
+            gap:20px;
+            padding:20px;
+        }
+        .hero h2{
+            font-size:28px;
+            margin-bottom:8px;
+        }
+        .hero p{
+            font-size:14px;
+            margin-bottom:12px;
+        }
+        .nav{
+            padding:12px 16px;
+        }
+        .actions a{
+            padding:8px 12px;
+            font-size:13px;
+            min-width:100px;
+        }
+        .section-title h3{
+            font-size:20px;
+        }
+        .modal{
+            max-height:85vh;
+        }
+        .modal img{
+            max-height:200px;
+        }
     }
 
     /* Very small screens */
     @media (max-width:360px){
-        .nav{padding:10px}
-        .brand{margin-bottom:10px}
-        .brand h1{font-size:16px}
-        .logo{width:32px;height:32px}
-        .actions{gap:4px}
-        .actions a{
-            min-width:80px;
-            padding:6px 8px;
-            font-size:12px;
+        .container{padding:12px}
+        .nav{
+            padding:12px;
+            gap:10px;
         }
-        .hero h2{font-size:24px}
-        .hero p{font-size:14px}
-        .hero .wrap{padding:20px 10px}
-        .btn-primary,.btn-outline{padding:8px 12px;font-size:13px}
-        .social-icon{width:36px;height:36px}
-        .jersey{font-size:10px;padding:4px 6px}
-        .player-info{padding:8px}
-        .player-name{font-size:14px}
-        .section-title h3{font-size:20px}
-        .news-card{padding:12px}
-        .news-title{font-size:16px}
+        .brand{
+            margin-bottom:12px;
+            text-align:center;
+        }
+        .brand h1{
+            font-size:16px;
+            margin-bottom:4px;
+        }
+        .logo{
+            width:32px;
+            height:32px;
+        }
+        .actions{
+            gap:6px;
+            justify-content:center;
+            flex-wrap:wrap;
+        }
+        .actions a{
+            min-width:100px;
+            padding:10px 12px;
+            font-size:13px;
+            min-height:40px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .hero .wrap{
+            padding:24px 12px;
+            gap:20px;
+        }
+        .hero h2{
+            font-size:26px;
+            line-height:1.2;
+            margin-bottom:12px;
+        }
+        .hero p{
+            font-size:15px;
+            line-height:1.4;
+        }
+        .btn-primary,.btn-outline{
+            padding:12px 16px;
+            font-size:15px;
+            min-height:44px;
+            width:100%;
+            margin-bottom:6px;
+        }
+        .social-icon{
+            width:40px;
+            height:40px;
+        }
+        .jersey{
+            font-size:10px;
+            padding:4px 6px;
+        }
+        .player-info{
+            padding:10px;
+        }
+        .player-name{
+            font-size:14px;
+            line-height:1.3;
+        }
+        .section-title h3{
+            font-size:22px;
+            margin-bottom:16px;
+        }
+        .news-card{
+            padding:14px;
+        }
+        .news-title{
+            font-size:17px;
+            line-height:1.3;
+        }
+        .modal{
+            max-width:98vw;
+            margin:10px auto;
+        }
+        .modal-content{
+            padding:16px;
+        }
+        .close-btn{
+            top:12px;
+            right:12px;
+            width:28px;
+            height:28px;
+            font-size:16px;
+        }
+        .stats-grid{
+            grid-template-columns:1fr;
+            gap:8px;
+        }
+        .stat{
+            padding:10px;
+        }
+        .contact-card{
+            padding:16px;
+        }
+        .map{
+            height:180px;
+        }
+        .wa-fab{
+            right:12px;
+            bottom:12px;
+            padding:12px 14px;
+            font-size:14px;
+        }
+        .admin-btn{
+            right:12px;
+            bottom:80px;
+            width:44px;
+            height:44px;
+            font-size:18px;
+        }
     }
 
     .player-card{position:relative;overflow:hidden;border-radius:14px;border:1px solid rgba(212,175,55,.2);background:linear-gradient(180deg,#0c1714,#0a1512);cursor:pointer}
@@ -295,9 +557,39 @@
     .stats{margin-top:12px;border-top:1px solid rgba(212,175,55,.2);padding-top:12px}
     .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
     .stat{background:rgba(11,61,46,.35);border:1px solid rgba(212,175,55,.2);border-radius:12px;padding:10px;text-align:center}
-    .close-btn{position:absolute;top:18px;right:18px;background:var(--gold);color:#111;border:none;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer}
+    .close-btn{position:absolute;top:18px;right:18px;background:var(--gold);color:#111;border:none;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
     .backdrop-show{display:flex}
-    @media (max-width:860px){.modal{grid-template-columns:1fr}.modal img{max-height:320px}}
+    @media (max-width:860px){
+        .modal{
+            grid-template-columns:1fr;
+            max-height:90vh;
+            overflow-y:auto;
+        }
+        .modal img{
+            max-height:250px;
+            width:100%;
+            object-fit:cover;
+        }
+    }
+    @media (max-width:480px){
+        .modal{
+            margin:10px;
+            max-width:calc(100vw - 20px);
+        }
+        .modal-content{
+            padding:16px;
+        }
+        .modal h4{
+            font-size:20px;
+        }
+        .close-btn{
+            top:12px;
+            right:12px;
+            min-width:40px;
+            min-height:40px;
+            padding:6px 8px;
+        }
+    }
 
     /* About + Contact */
     .about .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -311,7 +603,17 @@
     .map{width:100%;height:260px;border:0;border-radius:12px;filter:grayscale(.2) saturate(.8);}
 
     /* WhatsApp Floating Button */
-    .wa-fab{position:fixed;right:18px;bottom:18px;background:linear-gradient(180deg,#25D366,#138c47);color:#fff;border:none;border-radius:999px;padding:14px 16px;font-weight:800;box-shadow:var(--shadow);text-decoration:none;z-index:60}
+    .wa-fab{position:fixed;right:18px;bottom:18px;background:linear-gradient(180deg,#25D366,#138c47);color:#fff;border:none;border-radius:999px;padding:14px 16px;font-weight:800;box-shadow:var(--shadow);text-decoration:none;z-index:60;min-width:56px;min-height:56px;display:flex;align-items:center;justify-content:center;font-size:16px}
+    @media (max-width:480px){
+        .wa-fab{
+            right:16px;
+            bottom:16px;
+            padding:12px 14px;
+            min-width:52px;
+            min-height:52px;
+            font-size:14px;
+        }
+    }
 
     footer{padding:28px 24px;border-top:1px solid rgba(212,175,55,.2);text-align:center;opacity:.85}
 
@@ -513,8 +815,17 @@
     .offline-indicator.show{opacity:1;visibility:visible}
 
     /* Admin Panel */
-    .admin-btn{position:fixed;bottom:100px;right:20px;background:#ff4757;color:#fff;border:none;border-radius:50%;width:50px;height:50px;font-size:20px;cursor:pointer;z-index:1000;opacity:1;visibility:visible;transition:all .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+    .admin-btn{position:fixed;bottom:100px;right:20px;background:#ff4757;color:#fff;border:none;border-radius:50%;width:50px;height:50px;font-size:20px;cursor:pointer;z-index:1000;opacity:1;visibility:visible;transition:all .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.3);min-width:50px;min-height:50px;display:flex;align-items:center;justify-content:center}
     .admin-btn:hover{background:#ff3742;transform:scale(1.1)}
+    @media (max-width:480px){
+        .admin-btn{
+            bottom:80px;
+            right:16px;
+            width:48px;
+            height:48px;
+            font-size:18px;
+        }
+    }
     .admin-login-modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;visibility:hidden;transition:all .3s}
     .admin-login-modal.show{opacity:1;visibility:visible}
     .admin-login-content{background:var(--card);border-radius:12px;padding:30px;max-width:400px;width:90%;text-align:center;border:1px solid rgba(212,175,55,.2)}
